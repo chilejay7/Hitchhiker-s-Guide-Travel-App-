@@ -1,9 +1,14 @@
 ## Travel-Application
 
-## Description
-The motivation behind this project was to collaborate & build an application that would be a suitable travel companion when on the road. A hub for useful information like airline / airport info, and currency exchange rates. Utilizing two different APIs this application is able to save your important memos or reminders into an interactive calendar feature as well.
+## Description:
+The motivation behind this project was to collaborate & build an application that would be a suitable travel companion when on the road. A hub for useful information like airline / airport info, and currency exchange rates. Utilizing two different APIs this application is also able to save your important memos or reminders into an interactive calendar feature as well.
 
-## Link
+## Technologies Used:
+-[Free Forex API](https://freeforexapi.com/)<br>
+-[AviationStack API](https://aviationstack.com/documentation)<br>
+-[Insert Tech Here](InsertURLhere)
+
+## Link:
 [Link to Live URL](insertURLhere)
 
 
