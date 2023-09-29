@@ -8,12 +8,19 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 <body>
     <section>
         <div class="form-section">
         <div class="container1 mx-auto border border-dark rounded" style="width: 90%; max-width: 600px; margin: 100px auto 0; border-radius: 10%; padding: 30px;">
         <h1>Currency Exchange Selector</h1>
+        <form class="search-form">
+            <label class="label m-2">Please enter the desired currency</label>
+            <input type="text" class="form-control" id="city" placeholder="i.e. CAD">
+            <button class="ccyBtn btn-primary mx-auto border border-dark" style="width: 200px" id="submitBtn" type="submit">Submit</button>
+=======
         <form class="search-form" id="currency-exchange">
             <label class="label m-2" for="source-currency">Please enter the desired currency</label>
             <input type="text" class="form-control" id="city" placeholder="i.e. CAD" id="source-currency">
@@ -21,7 +28,86 @@
         </form>
         </div>
         </div>
+        <a href="https://www.freeforexapi.com">
+            <img alt="Free Forex API" src="https://www.freeforexapi.com/Images/link.png" height="20">
+        </a>
     </section>
+    <section>
+        <h2 class="cldr align-center" style="color: green;">Calendar</h2>
+        <table class="table grid bg-color-lightgrey align-center my-5 py-5">
+            <caption class="cap align-top"></caption>
+            <thead>
+                <tr>
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+            </thead>
+            <tbody class="grid">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"></script>
+    <script rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"></script>
+=======
     
     <script src="./assets/scripts/script.js"></script>
 </body>
