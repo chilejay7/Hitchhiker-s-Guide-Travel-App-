@@ -1,10 +1,12 @@
-
 feature/currencysection
 //Submit Button for Currency Exchange
 
 
 feautre/currencysection
+
 //Submit Button for Currency Exchange
+// const form = document.getElementById('currency-exchange');
+const form = $('#currency-exchange');
 
 
 let currencies = [];
@@ -22,10 +24,13 @@ getExchange = (currency, source) => {
         })
 };
 
+form.on ('submit', function (e) {
+  console.log(e);
+})
 
 
 
-main
+
 
 
 var access_key ="78985f0d07191548cd8017e3eb2389c2";
@@ -61,4 +66,3 @@ makeAPICall().then(response => {
     console.log("Scheduled Arrivals @ DEN", response);
 
 });
-
