@@ -1,5 +1,11 @@
+
+feature/currencysection
+//Submit Button for Currency Exchange
+
+
 feautre/currencysection
 //Submit Button for Currency Exchange
+
 
 let currencies = [];
 
@@ -15,4 +21,44 @@ getExchange = (currency, source) => {
             console.log(data);
         })
 };
+
+
+
+
+main
+
+
+var access_key ="78985f0d07191548cd8017e3eb2389c2";
+var flight_status = "scheduled";
+var arr_iata = "DEN";
+var queryURL = "http://api.aviationstack.com/v1/flights" + flight_status + arr_iata;
+
+function scheduledArrivalsDEN(arr_iata) {
+    return (arr_iata + flight_status);
+}
+
+async function makeAPICall() {
+    try {
+        const response = await fetch(queryURL);
+        if (!response.ok) {
+            throw new Error(`API request failed with status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const sch_arr = data.flight_status.arr_iata;
+        const sch_arr1 = scheduledArrivalsDEN(sch_arr);
+
+        console.log(`Scheduled Arrivals @ DEN: ${sch_arr}`)
+        return sch_arr 
+    } catch (error) {
+            console.error("An error occured:", error);
+            throw error;
+    }
+}
+
+
+makeAPICall().then(response => {
+    console.log("Scheduled Arrivals @ DEN", response);
+
+});
 
