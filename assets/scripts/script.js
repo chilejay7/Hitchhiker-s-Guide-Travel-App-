@@ -1,5 +1,6 @@
-feautre/currencysection
 //Submit Button for Currency Exchange
+// const form = document.getElementById('currency-exchange');
+const form = $('#currency-exchange');
 
 let currencies = [];
 
@@ -15,4 +16,9 @@ getExchange = (currency, source) => {
             console.log(data);
         })
 };
+
+form.on ('submit', function (e) {
+  console.log(e);
+})
+
 
