@@ -1,3 +1,6 @@
+feautre/currencysection
+//Submit Button for Currency Exchange
+
 let currencies = [];
 
 // This function will pull exchange rate information from the Forex API.  The currency and source variables will defined based on user input and incorporated into the function to create the parameters needed.
@@ -12,6 +15,4 @@ getExchange = (currency, source) => {
             console.log(data);
         })
 };
-
-
 
