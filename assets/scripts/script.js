@@ -16,3 +16,12 @@ getExchange = (currency, source) => {
         })
 };
 
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new calendarEl.Calendar({
+      initialView: 'dayGridMonth'
+    });
+    calendar.render();
+  });
+
+
