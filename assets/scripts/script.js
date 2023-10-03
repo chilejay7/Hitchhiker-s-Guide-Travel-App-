@@ -45,6 +45,23 @@ convertCurrency = (data, amount) => {
 // })
 
 currencyForm.on ('submit', function (e) {
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new calendarEl.Calendar({
+      initialView: 'dayGridMonth'
+    });
+    calendar.render();
+  });
+
+
+// form1.addEventListener('submit', function (e) {
+//     console.log(e);
+// })
+
+
+form.on ('submit', function (e) {
     // let inputSource = $('#source-currency').val()
     console.log(inputSource.value);
     console.log(inputExchange.value); 
@@ -105,4 +122,3 @@ currencyForm.on ('submit', function (e) {
 //     console.log("Scheduled Arrivals @ DEN", response);
 
 // });
-
