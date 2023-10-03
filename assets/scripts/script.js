@@ -1,11 +1,6 @@
-feature/currencysection
-//Submit Button for Currency Exchange
-
-
-feautre/currencysection
 
 //Submit Button for Currency Exchange
-// const form = document.getElementById('currency-exchange');
+const form1 = document.getElementById('currency-exchange');
 const form = $('#currency-exchange');
 
 
@@ -24,7 +19,7 @@ getExchange = (currency, source) => {
         })
 };
 
-<<<<<<< HEAD
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new calendarEl.Calendar({
@@ -34,15 +29,25 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
-=======
+// form1.addEventListener('submit', function (e) {
+//     console.log(e);
+// })
+
+
 form.on ('submit', function (e) {
-  console.log(e);
+    // let inputSource = $('#source-currency').val()
+    let inputSource = document.getElementById('source-currency').value
+    let inputExchange = document.getElementById('exchange-currency').value;
+    console.log(inputSource);
+    console.log(inputExchange); 
 })
 
 
 
 
 
+
+// Aviation API
 
 var access_key ="78985f0d07191548cd8017e3eb2389c2";
 var flight_status = "scheduled";
@@ -77,4 +82,4 @@ makeAPICall().then(response => {
     console.log("Scheduled Arrivals @ DEN", response);
 
 });
->>>>>>> 6d98f071f33eced788f359b80e9d7d16b012534f
+
