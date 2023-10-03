@@ -61,6 +61,8 @@
     <section class="calendar">
         <div class="month">
             <ul>
+              <button id="btnBack" style="float: left;"><i class="fa fa-angle-left"></i></button>
+              <button id="btnNext" style="float: right;"><i class="fa fa-angle-right"></i></button>
               <li class="prev">&#10094;</li>
               <li class="next">&#10095;</li>
               <li>October<br><span style="font-size:18px">2023</span></li>
@@ -68,13 +70,13 @@
           </div>
           
           <ul class="weekdays">
-            <li>Mo</li>
-            <li>Tu</li>
-            <li>We</li>
-            <li>Th</li>
-            <li>Fr</li>
-            <li>Sa</li>
-            <li>Su</li>
+            <li>Monday</li>
+            <li>Tuesday</li>
+            <li>Wednesday</li>
+            <li>Thursday</li>
+            <li>Friday</li>
+            <li>Saturday</li>
+            <li>Sunday</li>
           </ul>
           
           <ul class="days">
@@ -111,94 +113,11 @@
             <li>30</li>
             <li>31</li>
           </ul>
-        <!-- <div id="calendar">
-        <h2 class="cldr" style="color: green;">Calendar</h2> -->
-        <!-- <table class="table bg-color-lightgrey align-center my-100 py-100" style="border-color: black;">
-        <h2 class="cldr align-center" style="color: green;">Calendar</h2>
-
-        <table class="table bg-color-lightgrey align-center my-100 py-100" style="border-color: black;">
-        <div class="grid-calendar">
-        <table class="table bg-color-lightgrey align-center my-5 py-5">
-            <caption class="cap align-top"></caption>
-            <thead>
-                <tr>
-                    <th>Sunday</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="h-50"></td>
-                    <td class="h-50"></td>
-                    <td class="h-50"></td>
-                    <td class="h-50"></td>
-                    <td class="h-50"></td>
-                    <td class="h-50">1</td>
-                    <td class="h-50">2</td>
-=======
-                    <td class="col grid-cell"></td>
-                    <td class="col grid-cell"></td>
-                    <td class="col grid-cell"></td>
-                    <td class="col grid-cell"></td>
-                    <td class="col grid-cell"></td>
-                    <td class="col grid-cell">1</td>
-                    <td class="col grid-cell">2</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                    <td>14</td>
-                    <td>15</td>
-                    <td>16</td>
-                </tr>
-                <tr>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                    <td>21</td>
-                    <td>22</td>
-                    <td>23</td>
-                </tr>
-                <tr>
-                    <td>24</td>
-                    <td>25</td>
-                    <td>26</td>
-                    <td>27</td>
-                    <td>28</td>
-                    <td>29</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>31</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table> -->
-        </section>
-        </table>
-        </div>
+          <div id="viewEvent">
+            <h2>Event Actions</h2>
+            <button id="btnDelete">Delete</button>
+            <button class="btnClose">Close</button>
+          </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="

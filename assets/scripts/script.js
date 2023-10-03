@@ -28,6 +28,32 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
   });
 
+  function buttons() {
+    const btnBack = document.querySelector("#btnBack");
+    const btnNext = document.querySelector("#btnNext");
+    const btnDelete = document.querySelector("#btnDelete");
+    const closeButtons = document.querySelectorAll(".btnClose");
+  
+    btnBack.addEventListener("click", () => {
+      navigation--;
+      loadCalendar();
+    });
+    btnNext.addEventListener("click", () => {
+      navigation++;
+      loadCalendar();
+    });
+    modal.addEventListener("click", closeModal);
+    closeButtons.forEach((btn) => {
+      btn.addEventListener("click", closeModal);
+    });
+    btnDelete.addEventListener("click", function () {
+      events = events.filter((e) => e.date !== clicked);
+      localStorage.setItem("events", JSON.stringify(events));
+      closeModal();
+    });
+
+  }
+
 
 // form1.addEventListener('submit', function (e) {
 //     console.log(e);
