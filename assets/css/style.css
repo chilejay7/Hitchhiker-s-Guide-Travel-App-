@@ -5,7 +5,7 @@
 }
 
 body {
-    background-image: url(../images/balloons.avif);
+    background-image: url("./assets/images/balloons.avif");
     background-size: cover;
 }
 
@@ -43,12 +43,12 @@ a {
     font-weight: bold;
 }
 
-/* #container2 {
+#container2 {
     width: 800px;
 ul {
     list-style-type: none;
 
-}
+}}
 
 section .calender {
     font-family: Verdana, sans-serif;
@@ -58,7 +58,7 @@ section .calender {
 .month {
   margin-top: 70px;
   padding: 70px;
-  /* padding: 70px 25px; */
+  padding: 70px 25px;
   border-radius: 20px;
   width: 100%;
   height: 5px;
@@ -86,7 +86,7 @@ section .calender {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-} */
+}
 
 .month ul li {
   color: white;
