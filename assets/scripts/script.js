@@ -24,6 +24,7 @@ getExchange = (from, to, func1, amount) => {
         })
 };
 
+feature/currency-api
 // This function converts the currency amount to be exchanged.  The data argument is set to accept the data fromt the API response.  Amount is defined as an argument to be used with the input value needing to be exchanged.  The quotes object returned from the data contains the exchange rate.  This is multiplied by the inputAmount.value is passed from the getExchange function's arguments.
 convertCurrency = (data, amount) => {
     let quotes = Object.values(data.quotes);
@@ -40,6 +41,23 @@ convertCurrency = (data, amount) => {
 // })
 
 currencyForm.on ('submit', function (e) {
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new calendarEl.Calendar({
+      initialView: 'dayGridMonth'
+    });
+    calendar.render();
+  });
+
+
+// form1.addEventListener('submit', function (e) {
+//     console.log(e);
+// })
+
+
+form.on ('submit', function (e) {
     // let inputSource = $('#source-currency').val()
     console.log(inputSource.value);
     console.log(inputExchange.value); 
@@ -103,3 +121,7 @@ currencyForm.on ('submit', function (e) {
 //     console.log("Scheduled Arrivals @ DEN", response);
 
 // });
+
+});
+
+
