@@ -1,6 +1,7 @@
 
 //Submit Button for Currency Exchange
 const currencyForm = $('#currency-exchange');
+const autoCurrency = ['USD', 'EUR', 'AUD', 'CAD'];
 
 // These need the let keyword because they will be continuously redefined as different input values are entered.
 let inputSource = document.getElementById('source-currency')
@@ -40,20 +41,15 @@ convertCurrency = (data, amount) => {
     exchangeTotal.innerText = total;
 }
 
+$(function () {
+    $('#source-currency, #exchange-currency').autocomplete({
+        source: autoCurrency,
+    })
+});
+
 // form.addEventListener('submit', function (e) {
 //     console.log(e);
 // })
-
-currencyForm.on ('submit', function (e) {
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new calendarEl.Calendar({
-      initialView: 'dayGridMonth'
-    });
-    calendar.render();
-  });
 
 
 // form1.addEventListener('submit', function (e) {
@@ -61,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // })
 
 
-form.on ('submit', function (e) {
+currencyForm.on ('submit', function (e) {
     // let inputSource = $('#source-currency').val()
     console.log(inputSource.value);
     console.log(inputExchange.value); 
@@ -83,9 +79,15 @@ form.on ('submit', function (e) {
     // inputAmount.value = ''
     currencyForm[0].reset();
 
-})
+});
 
-
+// document.addEventListener('DOMContentLoaded', function() {
+//     var calendarEl = document.getElementById('calendar');
+//     var calendar = new calendarEl.Calendar({
+//       initialView: 'dayGridMonth'
+//     });
+//     calendar.render();
+//   });
 
 // Aviation API
 
@@ -121,4 +123,4 @@ form.on ('submit', function (e) {
 // makeAPICall().then(response => {
 //     console.log("Scheduled Arrivals @ DEN", response);
 
-// });
+// })
