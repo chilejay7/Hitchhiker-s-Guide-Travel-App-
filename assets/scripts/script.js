@@ -24,17 +24,7 @@ getExchange = (currency, source) => {
         })
 };
 
-<<<<<<< HEAD
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new calendarEl.Calendar({
-      initialView: 'dayGridMonth'
-    });
-    calendar.render();
-  });
 
-
-=======
 form.on ('submit', function (e) {
   console.log(e);
 })
@@ -77,4 +67,14 @@ makeAPICall().then(response => {
     console.log("Scheduled Arrivals @ DEN", response);
 
 });
->>>>>>> 6d98f071f33eced788f359b80e9d7d16b012534f
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new calendarEl.Calendar({
+      initialView: 'dayGridMonth'
+    });
+    calendar.render();
+  });
+
+ 
