@@ -1,5 +1,53 @@
+
+* {
+    font-family: 'Playfair Display', serif;
+    padding: 2px;
+}
+
+body {
+    background-image: url(../images/balloons.avif);
+    background-size: cover;
+}
+
+header {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    font-weight: bold;
+    border: solid black 2px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: .5em;
+}
+
+h1 {
+    flex-basis: 100%;
+}
+
+nav {
+    flex-basis: 50%;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    border: solid black 2px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+/* #container2 {
+    width: 800px;
 ul {
     list-style-type: none;
+
 }
 
 section .calender {
@@ -25,6 +73,20 @@ section .calender {
   padding: 0;
   justify-content: center;
 }
+
+.day {
+    width: 100px;
+    padding: 10px;
+    height: 100px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: beige;
+    margin: 5px;
+    box-shadow: 0px 0px 3px lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} */
 
 .month ul li {
   color: white;
@@ -79,3 +141,4 @@ section .calender {
   font-size: 30px;
   color: black;
 }
+
