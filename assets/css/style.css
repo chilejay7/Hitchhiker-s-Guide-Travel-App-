@@ -1,3 +1,4 @@
+
 * {
     font-family: 'Playfair Display', serif;
     padding: 2px;
@@ -70,6 +71,20 @@ section .calender {
   justify-content: center;
 }
 
+.day {
+    width: 100px;
+    padding: 10px;
+    height: 100px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: beige;
+    margin: 5px;
+    box-shadow: 0px 0px 3px lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} */
+
 .month ul li {
   color: white;
   font-size: 20px;
@@ -123,3 +138,4 @@ section .calender {
   font-size: 30px;
   color: black;
 }
+>>>>>>>>> Temporary merge branch 2
