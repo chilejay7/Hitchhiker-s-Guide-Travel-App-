@@ -105,13 +105,44 @@ changeOpacity = () => {
     }
 };
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     var calendarEl = document.getElementById('calendar');
-//     var calendar = new calendarEl.Calendar({
-//       initialView: 'dayGridMonth'
-//     });
-//     calendar.render();
-//   });
+
+
+// The following section defines code for the Calendar
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new calendarEl.Calendar({
+      initialView: 'dayGridMonth'
+    });
+    calendar.render();
+  });
+
+
+  function buttons() {
+    const btnBack = document.querySelector("#btnBack");
+    const btnNext = document.querySelector("#btnNext");
+    const btnDelete = document.querySelector("#btnDelete");
+    const closeButtons = document.querySelectorAll(".btnClose");
+  
+    btnBack.addEventListener("click", () => {
+      navigation--;
+      loadCalendar();
+    });
+    btnNext.addEventListener("click", () => {
+      navigation++;
+      loadCalendar();
+    });
+    modal.addEventListener("click", closeModal);
+    closeButtons.forEach((btn) => {
+      btn.addEventListener("click", closeModal);
+    });
+    btnDelete.addEventListener("click", function () {
+      events = events.filter((e) => e.date !== clicked);
+      localStorage.setItem("events", JSON.stringify(events));
+      closeModal();
+    });
+
+  }
+
 
 // Aviation API
 
