@@ -1,7 +1,24 @@
+:root {
+    --color1: #f0ebd8;
+    --color2: #748cab;
+    --color3: #3e5c76;
+    --color4: #1d2d44;
+    --color5: #0d1321;
+
+    --blue1: #caf0f8;
+    --blue1: #ade8f4;
+    --blue1: #90e0ef;
+    --blue1: #48cae4;
+    --blue1: #00b4d8;
+    --blue1: #0096c7;
+    --blue1: #0077b6;
+    --blue1: #023e8a;
+    --blue1: #03045e;    
+}
 
 * {
     font-family: 'Playfair Display', serif;
-    padding: 2px;
+    /* padding: 2px; */
 }
 
 body {
@@ -18,8 +35,11 @@ header {
     text-align: center;
     font-weight: bold;
     border: solid black 2px;
-    background-color: rgba(243, 236, 236, 0.5);
-    border-radius: .5em;
+    /* background-color: var(--color5); */
+    background: linear-gradient(90deg,#0077b6, #0d1321, #0077b6);
+    color: white;
+    /* border-radius: .5em; */
+    /* border: none; */
 }
 
 h1 {
@@ -28,27 +48,51 @@ h1 {
 
 nav {
     flex-basis: 50%;
+    
 }
 
 nav ul {
     display: flex;
     justify-content: space-evenly;
     list-style-type: none;
-    border: solid black 2px;
+    padding: 15px;
 }
 
 a {
     text-decoration: none;
-    color: black;
+    /* color: black; */
+    color: white;
     font-weight: bold;
 }
 
-#container2 {
-    width: 800px;
+a:hover {
+    color: var(--color2);
+}
+
 ul {
     list-style-type: none;
+}
 
-}}
+.container1 {
+    /* background-color: var(--color2); */
+    background: linear-gradient(#748cab, #3e5c76, #748cab);
+    font-weight: bold;
+    box-shadow: 10px 20px 20px;
+}
+
+div #currency-btn {
+    margin-top: 2%;
+    width: 20%;
+}
+
+#exchange-header {
+    text-align: center;
+}
+
+#currency-form {
+    opacity: 1;
+    transition: opacity 1s;
+}
 
 section .calender {
     font-family: Verdana, sans-serif;

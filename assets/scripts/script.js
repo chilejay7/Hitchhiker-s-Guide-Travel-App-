@@ -1,6 +1,31 @@
 
 //Submit Button for Currency Exchange
 const currencyForm = $('#currency-exchange');
+const autoCurrency = ['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTC', 'BTN', 'BWP', 'BYN', 'BYR', 'BZD', 'CAD', 'CDF', 'CHF', 'CLF', 'CLP', 'CNY', 'COP', 'CRC', 'CUC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'IMP', 'INR', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'JPY', 'KES', 'KGS', 'KHR', 'KMF', 'KPW', 'KRW', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LTL', 'LVL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRO', 'MUR', 'ZWL', 'ZMW', 'ZMK', 'ZAR', 'YER', 'XPF', 'XOF', 'XDR', 'XCD', 'XAU', 'XAG', 'XAF', 'WST', 'VUV', 'VND', 'VES', 'VEF', 'UZS', 'UYU', 'USD', 'UGX', 'UAH', 'TZS', 'TWD', 'TTD', 'TRY', 'TOP', 'TND', 'TMT', 'TJS', 'THB', 'SZL', 'SYP', 'SVC', 'STD', 'SSP', 'SRD', 'SOS', 'SLL', 'SLE', 'SHP', 'SGD', 'SEK', 'SDG', 'SCR', 'SBD', 'SAR', 'RWF', 'RUB', 'RSD', 'RON', 'QAR', 'PYG', 'PLN', 'PKR', 'PHP', 'PGK', 'PEN', 'PAB', 'OMR', 'NZD', 'NPR', 'NOK', 'NIO', 'NGN', 'NAD', 'MZN', 'MYR', 'MXN', 'MWK', 'MVR'];
+
+// The code below was used to get a list of available currencies and their three letter identifiers.
+let currencies = [];
+
+getList = () => {
+    fetch ('http://apilayer.net/api/list?access_key=e05cba2b74e776b6e26de31af283e09f')
+    .then (function (response) {
+        console.log(response);
+        return response.json();
+    })
+    .then (function (data) {
+        console.log(data);
+        currencies = Object.keys(data.currencies);
+        return currencies.reverse();
+    })
+}
+
+// This adds an autocomplete list.
+$(function () {
+    $('#source-currency, #exchange-currency').autocomplete({
+        source: autoCurrency,
+    })
+});
+
 
 // These need the let keyword because they will be continuously redefined as different input values are entered.
 let inputSource = document.getElementById('source-currency')
@@ -23,6 +48,7 @@ getExchange = (from, to, func1, amount) => {
             func1(data, amount)
         })
 };
+
 
 // form1.addEventListener('submit', function (e) {
 //     console.log(e);
@@ -47,6 +73,7 @@ convertCurrency = (data, amount) => {
 currencyForm.on ('submit', function (e) {
 
 
+// The following section defines code for the Calendar
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new calendarEl.Calendar({
@@ -54,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     calendar.render();
   });
+
 
 const calendar = document.querySelector("#calendar");
 const month = document.querySelector("#month");
@@ -180,4 +208,4 @@ form.on ('submit', function (e) {
 // makeAPICall().then(response => {
 //     console.log("Scheduled Arrivals @ DEN", response);
 
-// });
+// })
