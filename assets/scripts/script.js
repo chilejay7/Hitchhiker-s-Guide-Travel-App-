@@ -1,7 +1,7 @@
 
 //Submit Button for Currency Exchange
 const currencyForm = $('#currency-exchange');
-const autoCurrency = ['USD', 'EUR', 'AUD', 'CAD'];
+const autoCurrency = ['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTC', 'BTN', 'BWP', 'BYN', 'BYR', 'BZD', 'CAD', 'CDF', 'CHF', 'CLF', 'CLP', 'CNY', 'COP', 'CRC', 'CUC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'IMP', 'INR', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'JPY', 'KES', 'KGS', 'KHR', 'KMF', 'KPW', 'KRW', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LTL', 'LVL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRO', 'MUR'];
 
 // These need the let keyword because they will be continuously redefined as different input values are entered.
 let inputSource = document.getElementById('source-currency')
@@ -24,6 +24,22 @@ getExchange = (from, to, func1, amount) => {
             func1(data, amount)
         })
 };
+
+
+// The code below was used to get a list of available currencies and their three letter identifiers.
+let currencies = []
+
+getList = () => {
+    fetch ('http://apilayer.net/api/list?access_key=e05cba2b74e776b6e26de31af283e09f')
+    .then (function (response) {
+        console.log(response);
+        return response.json();
+    })
+    .then (function (data) {
+        console.log(data);
+        return currencies = Object.keys(data.currencies);
+    })
+}
 
 // form1.addEventListener('submit', function (e) {
 //     console.log(e);
@@ -69,7 +85,7 @@ currencyForm.on ('submit', function (e) {
 
     getExchange(inputSource.value, inputExchange.value, convertCurrency, inputAmount.value);
 
-    console.log('This ran already.');
+    // console.log('This ran already.');
 
     // convertCurrency(data);
 
