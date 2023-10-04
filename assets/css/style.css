@@ -1,4 +1,3 @@
-
 :root {
     --color1: #f0ebd8;
     --color2: #748cab;
@@ -56,8 +55,7 @@ nav ul {
     display: flex;
     justify-content: space-evenly;
     list-style-type: none;
-    /* border: solid black 2px; */
-    
+    padding: 15px;
 }
 
 a {
@@ -89,6 +87,11 @@ div #currency-btn {
 
 #exchange-header {
     text-align: center;
+}
+
+#currency-form {
+    opacity: 1;
+    transition: opacity 1s;
 }
 
 section .calender {
