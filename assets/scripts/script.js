@@ -55,6 +55,65 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
   });
 
+const calendar = document.querySelector("#calendar");
+const month = document.querySelector("#month");
+const viewEntryForm = document.querySelector("#viewEntry");
+let navigation = 0;
+let clicked = null;
+let entry = localStorage.getItem("entry") ? JSON.parse(localStorage.getItem("entry")) : [];
+const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+function getCalendar() {
+    const dt = new Date();
+  
+    if (navigation != 0) {
+      dt.setMonth(new Date().getMonth() + navigation);
+    }
+    const day = dt.getDate();
+    const month = dt.getMonth();
+    const year = dt.getFullYear();
+    monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
+      month: "long",
+    })} ${year}`;
+    calendar.innerHTML = "";
+    const dayOfMonth = new Date(year, month + 1,0).getDate();
+    const firstDayofMonth = new Date(year, month, 1);
+    const dateText = firstDayofMonth.toLocaleDateString("en-us", {
+      weekday: "long",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    })
+    };
+
+const viewEntry = document.querySelector("#viewEntry");
+    
+    function showModal(dateText) {
+      clicked = dateText;
+      const eventOfTheDay = events.find((e) => e.date == dateText);
+      if (eventOfTheDay) {
+        document.querySelector("#days").innerText = eventOfTheDay.title;
+        viewEntry.style.display = "block";
+      }
+    }
+
+  function buttons() {
+    const btnBack = document.querySelector("#btnBack");
+    const btnNext = document.querySelector("#btnNext");
+  
+    btnBack.addEventListener("click", () => {
+      navigation--;
+      getCalendar();
+    });
+    btnNext.addEventListener("click", () => {
+      navigation++;
+      getCalendar();
+    });
+
+  }
+  showModal();
+  buttons();
+
 
 // form1.addEventListener('submit', function (e) {
 //     console.log(e);
