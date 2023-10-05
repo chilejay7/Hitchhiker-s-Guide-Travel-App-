@@ -66,24 +66,21 @@
     </section>
 
     <section>
-            <div class="container1 mx-auto border border-dark rounded" style="width: 90%; max-width: 600px; margin: 100px auto 0; border-radius: 10%; padding: 30px;" id="currency-container">
+        <div class="container1 mx-auto border border-dark rounded" style="width: 90%; max-width: 600px; margin: 100px auto 0; border-radius: 10%; padding: 30px;">
             <div class="col-12 col-md-9 flex-column align-center bg-light p-5">
-              <h1 class="text-primary">Airport search</h1>
-              <form id="Airport-form" class="form w-100">
-                <input id="airport-input" class="form-input w-100" type="text" placeholder="Search!">
-                <select id="format-input" class="form-input w-100">
-                  <option value="" disabled selected>Select a format...</option>
-                  <option value="DEN">Denver, CO International</option>
-                  <option value="DAL">Dallas, TX Love Field</option>
-                  <option value="DFW">Hartsfield-Jackson Atlanta International Airport</option>
-                  <option value="manuscripts">Dallas/Fort Worth International Airport</option>
-                  <option value="ORD">O'Hare International Airport</option>
-                </select>
-                <button class="btn btn-info btn-block">Submit</button>
-              </form>
+                <h1 class="text-primary">Airport Search</h1>
+                <form id="airport-form" class="form w-100">
+                    <select id="format-input" class="form-input w-100">
+                        <option value="" disabled selected>Select an airport</option>
+                        <option value="LAX">Los Angeles, CA (LAX)</option>
+                        <option value="DEN">Denver, CO (DEN)</option>
+                        <option value="AUS">Austin, TX (AUS)</option>
+                        <option value="ORD">Chicago, IL (ORD)</option>
+                    </select>
+                    <button class="btn btn-info btn-block">Submit</button>
+                </form>
             </div>
         </div>
-          </div>
     </section>
 
     <section class="calendar">
