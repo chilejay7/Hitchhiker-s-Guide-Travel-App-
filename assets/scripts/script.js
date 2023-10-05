@@ -88,7 +88,7 @@ const month = document.querySelector("#month");
 const viewEntry = document.querySelector("#viewEntry");
 let navigation = 0;
 let clicked = null;
-let entry = localStorage.getItem("entry") ? JSON.parse(localStorage.getItem("entry")) : [];
+let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -98,7 +98,7 @@ function getCalendar() {
     if (navigation != 0) {
       dt.setMonth(new Date().getMonth() + navigation);
     }
-    const day = dt.getDate();
+    const day= dt.getDate();
     const month = dt.getMonth();
     console.log(month);
     const year = dt.getFullYear();
@@ -114,15 +114,48 @@ function getCalendar() {
       month: "numeric",
       day: "numeric",
     })
+
+    const dayString = dateText.split(", ")[0];
+    const emptyDays = weekdays.indexOf(dayString);
+
+    for (let i = 1; i <= dayOfMonth + emptyDays; i++) {
+    const dayBox = document.createElement("div");
+    dayBox.classList.add("day");
+    const monthVal = month + 1 < 12 ? "0" + (month + 1) : month + 1;
+    const dateVal = i - emptyDays < 12 ? "0" + (i - emptyDays) : i - emptyDays;
+    const dateText = `${dateVal}-${monthVal}-${year}`;
+    if (i > emptyDays) {
+        dayBox.innerText = i - emptyDays;
+        const eventOfTheDay = events.find((e) => e.date == dateText);
+
+        if (i - emptyDays === day && navigation == 0) {
+        dayBox.id = "currentDay";
+        }
+
+        if (eventOfTheDay) {
+        const eventDiv = document.createElement("div");
+        eventDiv.classList.add("event");
+        eventDiv.innerText = eventOfTheDay.title;
+        dayBox.appendChild(eventDiv);
+        }
+
+        dayBox.addEventListener("click", () => {
+        showModal(dateText);
+        });
+    } else {
+        dayBox.classList.add("plain");
+    }
+    calendar.append(dayBox);
+    }
 };
     
 function showModal(dateText) {
       clicked = dateText;
-    //   const eventOfTheDay = events.find((e) => e.date == dateText);
-    //   if (eventOfTheDay) {
-    //     document.querySelector("#days").innerText = eventOfTheDay.title;
-    //     viewEntry.style.display = "block";
-    //   }
+      const eventOfTheDay = entry.find((e) => e.date == dateText);
+      if (eventOfTheDay) {
+        document.querySelector("#days").innerText = eventOfTheDay.title;
+        viewEntry.style.display = "block";
+      }
 }
 
 function buttons() {
