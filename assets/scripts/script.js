@@ -110,23 +110,28 @@ const month = document.querySelector("#month");
 const viewEntry = document.querySelector("#viewEntry");
 let navigation = 0;
 let clicked = null;
-let entry = localStorage.getItem("entry") ? JSON.parse(localStorage.getItem("entry")) : [];
+let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+// const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-function getCalendar() {
+dayjs()
+
+function getEventDate() {
     const dt = new Date();
   
-    if (navigation != 0) {
-      dt.setMonth(new Date().getMonth() + navigation);
-    }
-    const day = dt.getDate();
+    // if (navigation != 0) {
+    //   dt.setMonth(new Date().getMonth() + navigation);
+    // }
+    
+    const day= dt.getDate();
     const month = dt.getMonth();
     console.log(month);
     const year = dt.getFullYear();
-    monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
-      month: "long",
-    })} ${year}`;
+
+    // monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
+    //   month: "long",
+    // })} ${year}`;
+
     calendar.innerHTML = "";
     const dayOfMonth = new Date(year, month + 1,0).getDate();
     const firstDayofMonth = new Date(year, month, 1);
@@ -136,32 +141,51 @@ function getCalendar() {
       month: "numeric",
       day: "numeric",
     })
+
+    const dayString = dateText.split(", ")[0];
+    const emptyDays = weekdays.indexOf(dayString);
+
+    for (let i = 1; i <= dayOfMonth + emptyDays; i++) {
+    const dayBox = document.createElement("div");
+    dayBox.classList.add("day");
+    const monthVal = month;
+    const dateVal = i - emptyDays < 31 ? "0" + (i - emptyDays) : i - emptyDays;
+    const dateText = `${dateVal}-${monthVal}-${year}`;
+    if (i > emptyDays) {
+        dayBox.innerText = i - emptyDays;
+        const eventOfTheDay = events.find((e) => e.date == dateText);
+
+        if (i - emptyDays === day && navigation == 0) {
+        dayBox.id = "currentDay";
+        }
+
+        if (eventOfTheDay) {
+        const eventDiv = document.createElement("div");
+        eventDiv.classList.add("event");
+        eventDiv.innerText = eventOfTheDay.title;
+        dayBox.appendChild(eventDiv);
+        }
+
+        dayBox.addEventListener("click", () => {
+        showModal(dateText);
+        });
+    } else {
+        dayBox.classList.add("plain");
+    }
+    calendar.append(dayBox);
+    }
 };
 
 function showModal(dateText) {
       clicked = dateText;
-    //   const eventOfTheDay = events.find((e) => e.date == dateText);
-    //   if (eventOfTheDay) {
-    //     document.querySelector("#days").innerText = eventOfTheDay.title;
-    //     viewEntry.style.display = "block";
-    //   }
+      const eventOfTheDay = events.find((e) => e.date == dateText);
+      if (eventOfTheDay) {
+        document.querySelector("#days").innerText = eventOfTheDay.title;
+        viewEntry.style.display = "block";
+      }
 }
+showModal();
+getEventDate();
 
-function buttons() {
-    const btnBack = document.querySelector("#btnBack");
-    const btnNext = document.querySelector("#btnNext");
-  
-    btnBack.addEventListener("click", () => {
-      navigation--;
-      getCalendar();
-    });
-    btnNext.addEventListener("click", () => {
-      navigation++;
-      getCalendar();
-    });
-
-}
-  showModal();
-  buttons();
 
 // Aviation API
