@@ -1,0 +1,188 @@
+:root {
+    --color1: #f0ebd8;
+    --color2: #748cab;
+    --color3: #3e5c76;
+    --color4: #1d2d44;
+    --color5: #0d1321;
+
+    --blue1: #caf0f8;
+    --blue1: #ade8f4;
+    --blue1: #90e0ef;
+    --blue1: #48cae4;
+    --blue1: #00b4d8;
+    --blue1: #0096c7;
+    --blue1: #0077b6;
+    --blue1: #023e8a;
+    --blue1: #03045e;    
+}
+
+* {
+    font-family: 'Playfair Display', serif;
+    /* padding: 2px; */
+}
+
+body {
+    background-image: url(../images/balloons.avif);
+    background-size: cover;
+}
+
+header {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    font-weight: bold;
+    border: solid black 2px;
+    /* background-color: var(--color5); */
+    background: linear-gradient(90deg,#0077b6, #0d1321, #0077b6);
+    color: white;
+    /* border-radius: .5em; */
+    /* border: none; */
+}
+
+h1 {
+    flex-basis: 100%;
+}
+
+nav {
+    flex-basis: 50%;
+    
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    padding: 15px;
+}
+
+a {
+    text-decoration: none;
+    /* color: black; */
+    color: white;
+    font-weight: bold;
+}
+
+a:hover {
+    color: var(--color2);
+}
+
+ul {
+    list-style-type: none;
+}
+
+.container1 {
+    /* background-color: var(--color2); */
+    background: linear-gradient(#748cab, #3e5c76, #748cab);
+    font-weight: bold;
+    box-shadow: 10px 20px 20px;
+}
+
+div #currency-btn {
+    margin-top: 2%;
+    width: 20%;
+}
+
+#exchange-header {
+    text-align: center;
+}
+
+#currency-form {
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+section .calender {
+    font-family: Verdana, sans-serif;
+    margin: 20px;
+}
+
+.month {
+  margin-top: 70px;
+  padding: 70px;
+  padding: 70px 25px;
+  border-radius: 20px;
+  width: 100%;
+  height: 5px;
+  background: blue;
+  text-align: center;
+  justify-content: center;
+}
+
+.month ul {
+  margin: auto;
+  margin-top: -20px;
+  padding: 0;
+  justify-content: center;
+}
+
+.day {
+    width: 100px;
+    padding: 10px;
+    height: 100px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: beige;
+    margin: 5px;
+    box-shadow: 0px 0px 3px lightgrey;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+.weekdays {
+  margin: 20px;
+  padding: 10px 0;
+  background-color: teal;
+  font-size: 30px;
+  box-sizing: border-box;
+  border: 20px black;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: white;
+  text-align: center;
+}
+
+.days {
+  padding: 10px;
+  background: lightblue;
+  height: 1150px;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  flex-direction: row;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 50px blue;
+  width: 13.6%;
+  height: 200px;
+  text-align: center;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-size: 30px;
+  color: black;
+}
+
