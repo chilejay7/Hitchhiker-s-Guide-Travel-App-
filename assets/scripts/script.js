@@ -165,3 +165,52 @@ function buttons() {
   buttons();
 
 // Aviation API
+var searchFormEl = document.querySelector('#airport-form');
+var formatInputEl = document.querySelector('#format-input');
+
+var arr_iata = "";
+var access_key = "d36d2907-0b8e-4cdf-a4d1-7d3d03d05ee1"; // Replace with your actual access key
+
+async function searchApi(formatInputVal) {
+  var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&arr_iata=${formatInputVal}`;
+    const response = await fetch(queryURL)
+    .then( (response) => {
+        if (!response.ok) {
+            throw new Error(`API request failed with status: ${response.status}`);
+        }
+        return response.json()
+    })
+    .then( (res) =>{
+        var data = res.response
+        if (Array.isArray(data) && data.length > 0) {
+            // Iterate through flights and log their statuses
+            console.log(data);
+            data.forEach((flight) => {
+            //   console.log(flight)
+              const flightStatus = flight.status;
+              const flightNumber = flight.flight_number;
+              const flightIata = flight.flight_iata;
+              console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
+            });
+          } else {
+            console.log("No flight data available.");
+          }
+    } )
+}
+
+
+function handleSearchFormSubmit(event) {
+  event.preventDefault();
+
+  
+  var formatInputVal = formatInputEl.value
+console.log(formatInputVal);
+  if (!formatInputVal) {
+    console.error('You need a search input value!');
+    return;
+  }
+
+  searchApi(formatInputVal);
+}
+
+searchFormEl.addEventListener('submit', handleSearchFormSubmit);
