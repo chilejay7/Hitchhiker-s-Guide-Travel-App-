@@ -121,4 +121,25 @@ form.on ('submit', function (e) {
 // makeAPICall().then(response => {
 //     console.log("Scheduled Arrivals @ DEN", response);
 
-// });
+ });
+
+ const accessKey = '129c19d5d8cf61dcb68800857cb59484';
+const apiUrl = `http://api.aviationstack.com/v1/flights?access_key=${accessKey}`;
+
+fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    // Access flight status and flight date from the response data
+    const flights = data.data;
+    flights.forEach(flight => {
+      const flightStatus = flight.flight_status;
+    //   const flightDate = flight.flight_date;
+
+      // Do something with flight status and flight date
+      console.log(`Flight Status: ${flightStatus}`);
+    //   console.log(`Flight Date: ${flightDate}`);
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
