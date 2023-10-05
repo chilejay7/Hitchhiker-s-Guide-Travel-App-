@@ -114,7 +114,7 @@ let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(ge
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-dayjs()
+// dayjs(day)
 
 function getEventDate() {
     const dt = new Date();
