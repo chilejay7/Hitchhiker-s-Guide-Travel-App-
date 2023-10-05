@@ -105,77 +105,63 @@ changeOpacity = () => {
     }
 };
 
+const calendar = document.querySelector("#calendar");
+const month = document.querySelector("#month");
+const viewEntry = document.querySelector("#viewEntry");
+let navigation = 0;
+let clicked = null;
+let entry = localStorage.getItem("entry") ? JSON.parse(localStorage.getItem("entry")) : [];
+const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
+function getCalendar() {
+    const dt = new Date();
+  
+    if (navigation != 0) {
+      dt.setMonth(new Date().getMonth() + navigation);
+    }
+    const day = dt.getDate();
+    const month = dt.getMonth();
+    console.log(month);
+    const year = dt.getFullYear();
+    monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
+      month: "long",
+    })} ${year}`;
+    calendar.innerHTML = "";
+    const dayOfMonth = new Date(year, month + 1,0).getDate();
+    const firstDayofMonth = new Date(year, month, 1);
+    const dateText = firstDayofMonth.toLocaleDateString("en-us", {
+      weekday: "long",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    })
+};
 
-// The following section defines code for the Calendar
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new calendarEl.Calendar({
-      initialView: 'dayGridMonth'
-    });
-    calendar.render();
-  });
+function showModal(dateText) {
+      clicked = dateText;
+    //   const eventOfTheDay = events.find((e) => e.date == dateText);
+    //   if (eventOfTheDay) {
+    //     document.querySelector("#days").innerText = eventOfTheDay.title;
+    //     viewEntry.style.display = "block";
+    //   }
+}
 
-
-  function buttons() {
+function buttons() {
     const btnBack = document.querySelector("#btnBack");
     const btnNext = document.querySelector("#btnNext");
-    const btnDelete = document.querySelector("#btnDelete");
-    const closeButtons = document.querySelectorAll(".btnClose");
   
     btnBack.addEventListener("click", () => {
       navigation--;
-      loadCalendar();
+      getCalendar();
     });
     btnNext.addEventListener("click", () => {
       navigation++;
-      loadCalendar();
-    });
-    modal.addEventListener("click", closeModal);
-    closeButtons.forEach((btn) => {
-      btn.addEventListener("click", closeModal);
-    });
-    btnDelete.addEventListener("click", function () {
-      events = events.filter((e) => e.date !== clicked);
-      localStorage.setItem("events", JSON.stringify(events));
-      closeModal();
+      getCalendar();
     });
 
-  }
-
+}
+  showModal();
+  buttons();
 
 // Aviation API
-
-// var access_key ="78985f0d07191548cd8017e3eb2389c2";
-// var flight_status = "scheduled";
-// var arr_iata = "DEN";
-// var queryURL = "http://api.aviationstack.com/v1/flights" + flight_status + arr_iata;
-
-// function scheduledArrivalsDEN(arr_iata) {
-//     return (arr_iata + flight_status);
-// }
-
-// async function makeAPICall() {
-//     try {
-//         const response = await fetch(queryURL);
-//         if (!response.ok) {
-//             throw new Error(`API request failed with status: ${response.status}`);
-//         }
-
-//         const data = await response.json();
-//         const sch_arr = data.flight_status.arr_iata;
-//         const sch_arr1 = scheduledArrivalsDEN(sch_arr);
-
-//         console.log(`Scheduled Arrivals @ DEN: ${sch_arr}`)
-//         return sch_arr 
-//     } catch (error) {
-//             console.error("An error occured:", error);
-//             throw error;
-//     }
-// }
-
-
-// makeAPICall().then(response => {
-//     console.log("Scheduled Arrivals @ DEN", response);
-
-// })
