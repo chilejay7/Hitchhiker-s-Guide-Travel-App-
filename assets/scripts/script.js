@@ -28,37 +28,37 @@ getExchange = (currency, source) => {
 main
 
 
-var access_key ="78985f0d07191548cd8017e3eb2389c2";
-var flight_status = "scheduled";
-var arr_iata = "DEN";
-var queryURL = "http://api.aviationstack.com/v1/flights" + flight_status + arr_iata;
-
-function scheduledArrivalsDEN(arr_iata) {
-    return (arr_iata + flight_status);
-}
+// Aviation API
+var arr_iata = "LAX";
+var access_key = "d36d2907-0b8e-4cdf-a4d1-7d3d03d05ee1"; // Replace with your actual access key
+var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&arr_iata=${arr_iata}`;
 
 async function makeAPICall() {
-    try {
-        const response = await fetch(queryURL);
+    const response = await fetch(queryURL)
+    .then( (response) => {
         if (!response.ok) {
             throw new Error(`API request failed with status: ${response.status}`);
         }
 
-        const data = await response.json();
-        const sch_arr = data.flight_status.arr_iata;
-        const sch_arr1 = scheduledArrivalsDEN(sch_arr);
+        return response.json()
+    })
+    .then( (res) =>{
+        var data = res.response
 
-        console.log(`Scheduled Arrivals @ DEN: ${sch_arr}`)
-        return sch_arr 
-    } catch (error) {
-            console.error("An error occured:", error);
-            throw error;
-    }
+        if (Array.isArray(data) && data.length > 0) {
+            // Iterate through flights and log their statuses
+            data.forEach((flight) => {    
+            //   console.log(flight)
+              const flightStatus = flight.status;
+              const flightNumber = flight.flight_number;
+              const flightIata = flight.flight_iata;
+              console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
+            });
+          } else {
+            console.log("No flight data available.");
+          }
+    } )
 }
 
-
-makeAPICall().then(response => {
-    console.log("Scheduled Arrivals @ DEN", response);
-
-});
+makeAPICall()
 
