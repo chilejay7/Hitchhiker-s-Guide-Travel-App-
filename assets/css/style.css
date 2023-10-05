@@ -154,6 +154,7 @@ section .calender {
   padding: 10px 0;
   background-color: teal;
   font-size: 30px;
+  flex-wrap: wrap;
   box-sizing: border-box;
   border: 20px black;
 }

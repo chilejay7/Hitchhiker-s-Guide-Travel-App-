@@ -112,7 +112,7 @@ let navigation = 0;
 let clicked = null;
 let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+// const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 function getCalendar() {
     const dt = new Date();
@@ -143,8 +143,8 @@ function getCalendar() {
     for (let i = 1; i <= dayOfMonth + emptyDays; i++) {
     const dayBox = document.createElement("div");
     dayBox.classList.add("day");
-    const monthVal = month + 1 < 12 ? "0" + (month + 1) : month + 1;
-    const dateVal = i - emptyDays < 12 ? "0" + (i - emptyDays) : i - emptyDays;
+    const monthVal = month;
+    const dateVal = i - emptyDays < 31 ? "0" + (i - emptyDays) : i - emptyDays;
     const dateText = `${dateVal}-${monthVal}-${year}`;
     if (i > emptyDays) {
         dayBox.innerText = i - emptyDays;
@@ -173,28 +173,13 @@ function getCalendar() {
 
 function showModal(dateText) {
       clicked = dateText;
-      const eventOfTheDay = entry.find((e) => e.date == dateText);
+      const eventOfTheDay = events.find((e) => e.date == dateText);
       if (eventOfTheDay) {
         document.querySelector("#days").innerText = eventOfTheDay.title;
         viewEntry.style.display = "block";
       }
 }
+showModal();
 
-function buttons() {
-    const btnBack = document.querySelector("#btnBack");
-    const btnNext = document.querySelector("#btnNext");
-  
-    btnBack.addEventListener("click", () => {
-      navigation--;
-      getCalendar();
-    });
-    btnNext.addEventListener("click", () => {
-      navigation++;
-      getCalendar();
-    });
-
-}
-  showModal();
-  buttons();
 
 // Aviation API
