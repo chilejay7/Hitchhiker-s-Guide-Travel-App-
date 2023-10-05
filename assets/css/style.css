@@ -187,3 +187,6 @@ section .calender {
   color: black;
 }
 
+p {
+  font-size: 50%;
+}
