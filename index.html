@@ -66,22 +66,24 @@
     </section>
 
     <section>
-            <div class="container1 mx-auto border border-dark rounded" style="width: 90%; max-width: 600px; margin: 100px auto 0; border-radius: 10%; padding: 30px;">
+            <div class="container1 mx-auto border border-dark rounded" style="width: 90%; max-width: 600px; margin: 100px auto 0; border-radius: 10%; padding: 30px;" id="currency-container">
             <div class="col-12 col-md-9 flex-column align-center bg-light p-5">
-                <h1 class="text-primary">Airport Selector</h1>
-                <form id="airport-form" class="form w-100">
-                    <select id="format-input" class="form-input w-100">
-                        <option value="" disabled selected>Select an airport</option>
-                        <option value="LAX">Los Angeles, CA (LAX)</option>
-                        <option value="DEN">Denver, CO (DEN)</option>
-                        <option value="AUS">Austin, TX (AUS)</option>
-                        <option value="ORD">Chicago, IL (ORD)</option>
-                        <option value="TPA">Tampa, FL (TPA)</option>
-                    </select>
-                    <button class="btn btn-info btn-block">Submit</button>
-                </form>
+              <h1 class="text-primary">Airport search</h1>
+              <form id="Airport-form" class="form w-100">
+                <input id="airport-input" class="form-input w-100" type="text" placeholder="Search!">
+                <select id="format-input" class="form-input w-100">
+                  <option value="" disabled selected>Select a format...</option>
+                  <option value="DEN">Denver, CO International</option>
+                  <option value="DAL">Dallas, TX Love Field</option>
+                  <option value="DFW">Hartsfield-Jackson Atlanta International Airport</option>
+                  <option value="manuscripts">Dallas/Fort Worth International Airport</option>
+                  <option value="ORD">O'Hare International Airport</option>
+                </select>
+                <button class="btn btn-info btn-block">Submit</button>
+              </form>
             </div>
         </div>
+          </div>
     </section>
 
     <section class="calendar">
@@ -143,80 +145,6 @@
             <button id="btnDelete">Delete</button>
             <button class="btnClose">Close</button>
           </div>
-    </section>
-
-    <section>
-        <h2 class="cldr align-center" style="color: green;">Calendar</h2>
-        <table class="table grid bg-color-lightgrey align-center my-5 py-5">
-            <caption class="cap align-top"></caption>
-            <thead>
-                <tr>
-                    <th>Sunday</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                </tr>
-            </thead>
-            <tbody class="grid">
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>1</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                    <td>14</td>
-                    <td>15</td>
-                    <td>16</td>
-                </tr>
-                <tr>
-                    <td>17</td>
-                    <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                    <td>21</td>
-                    <td>22</td>
-                    <td>23</td>
-                </tr>
-                <tr>
-                    <td>24</td>
-                    <td>25</td>
-                    <td>26</td>
-                    <td>27</td>
-                    <td>28</td>
-                    <td>29</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>31</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
     </section>
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
