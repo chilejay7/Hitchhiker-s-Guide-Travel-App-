@@ -114,19 +114,24 @@ let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(vi
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-function getCalendar() {
+dayjs()
+
+function getEventDate() {
     const dt = new Date();
   
-    if (navigation != 0) {
-      dt.setMonth(new Date().getMonth() + navigation);
-    }
+    // if (navigation != 0) {
+    //   dt.setMonth(new Date().getMonth() + navigation);
+    // }
+    
     const day= dt.getDate();
     const month = dt.getMonth();
     console.log(month);
     const year = dt.getFullYear();
-    monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
-      month: "long",
-    })} ${year}`;
+
+    // monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
+    //   month: "long",
+    // })} ${year}`;
+
     calendar.innerHTML = "";
     const dayOfMonth = new Date(year, month + 1,0).getDate();
     const firstDayofMonth = new Date(year, month, 1);
@@ -180,6 +185,7 @@ function showModal(dateText) {
       }
 }
 showModal();
+getEventDate();
 
 
 // Aviation API
