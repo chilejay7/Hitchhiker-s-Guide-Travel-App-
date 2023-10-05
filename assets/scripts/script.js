@@ -110,7 +110,7 @@ const month = document.querySelector("#month");
 const viewEntry = document.querySelector("#viewEntry");
 let navigation = 0;
 let clicked = null;
-let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
+let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(getExchange, flight)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -124,9 +124,11 @@ function getEventDate() {
     // }
     
     const day= dt.getDate();
+    console.log(day);
     const month = dt.getMonth();
     console.log(month);
     const year = dt.getFullYear();
+    console.log(year);
 
     // monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
     //   month: "long",
@@ -135,6 +137,7 @@ function getEventDate() {
     calendar.innerHTML = "";
     const dayOfMonth = new Date(year, month + 1,0).getDate();
     const firstDayofMonth = new Date(year, month, 1);
+    console.log(firstDayofMonth);
     const dateText = firstDayofMonth.toLocaleDateString("en-us", {
       weekday: "long",
       year: "numeric",
@@ -151,6 +154,8 @@ function getEventDate() {
     const monthVal = month;
     const dateVal = i - emptyDays < 31 ? "0" + (i - emptyDays) : i - emptyDays;
     const dateText = `${dateVal}-${monthVal}-${year}`;
+    console.log(dateVal);
+
     if (i > emptyDays) {
         dayBox.innerText = i - emptyDays;
         const eventOfTheDay = events.find((e) => e.date == dateText);
@@ -161,14 +166,16 @@ function getEventDate() {
 
         if (eventOfTheDay) {
         const eventDiv = document.createElement("div");
-        eventDiv.classList.add("event");
+        eventDiv.classList.add(events);
         eventDiv.innerText = eventOfTheDay.title;
         dayBox.appendChild(eventDiv);
         }
 
         dayBox.addEventListener("click", () => {
         showModal(dateText);
+
         });
+
     } else {
         dayBox.classList.add("plain");
     }
@@ -179,6 +186,7 @@ function getEventDate() {
 function showModal(dateText) {
       clicked = dateText;
       const eventOfTheDay = events.find((e) => e.date == dateText);
+      console.log(eventOfTheDay);
       if (eventOfTheDay) {
         document.querySelector("#days").innerText = eventOfTheDay.title;
         viewEntry.style.display = "block";
