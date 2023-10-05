@@ -70,26 +70,27 @@ convertCurrency = (data, amount) => {
 //     console.log(e);
 // })
 
-currencyForm.on ('submit', function (e) {
+currencyForm.on ('submit', function (e) {})
 
 
 // The following section defines code for the Calendar
-document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new calendarEl.Calendar({
-      initialView: 'dayGridMonth'
-    });
-    calendar.render();
-  });
+// document.addEventListener('DOMContentLoaded', function() {
+//     var calendarEl = document.getElementById('calendar');
+//     var calendar = new calendarEl.Calendar({
+//       initialView: 'dayGridMonth'
+//     });
+//     calendar.render();
+//   });
 
 
 const calendar = document.querySelector("#calendar");
 const month = document.querySelector("#month");
-const viewEntryForm = document.querySelector("#viewEntry");
+const viewEntry = document.querySelector("#viewEntry");
 let navigation = 0;
 let clicked = null;
 let entry = localStorage.getItem("entry") ? JSON.parse(localStorage.getItem("entry")) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
 function getCalendar() {
     const dt = new Date();
@@ -99,6 +100,7 @@ function getCalendar() {
     }
     const day = dt.getDate();
     const month = dt.getMonth();
+    console.log(month);
     const year = dt.getFullYear();
     monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
       month: "long",
@@ -112,20 +114,18 @@ function getCalendar() {
       month: "numeric",
       day: "numeric",
     })
-    };
-
-const viewEntry = document.querySelector("#viewEntry");
+};
     
-    function showModal(dateText) {
+function showModal(dateText) {
       clicked = dateText;
-      const eventOfTheDay = events.find((e) => e.date == dateText);
-      if (eventOfTheDay) {
-        document.querySelector("#days").innerText = eventOfTheDay.title;
-        viewEntry.style.display = "block";
-      }
-    }
+    //   const eventOfTheDay = events.find((e) => e.date == dateText);
+    //   if (eventOfTheDay) {
+    //     document.querySelector("#days").innerText = eventOfTheDay.title;
+    //     viewEntry.style.display = "block";
+    //   }
+}
 
-  function buttons() {
+function buttons() {
     const btnBack = document.querySelector("#btnBack");
     const btnNext = document.querySelector("#btnNext");
   
@@ -138,7 +138,7 @@ const viewEntry = document.querySelector("#viewEntry");
       getCalendar();
     });
 
-  }
+}
   showModal();
   buttons();
 
