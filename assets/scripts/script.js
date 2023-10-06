@@ -215,6 +215,13 @@ async function searchApi(formatInputVal) {
               const flightNumber = flight.flight_number;
               const flightIata = flight.flight_iata;
               console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
+              const date = dayjs().date();
+              var columnId = `day-${date}`;
+              var column = document.getElementById(columnId);
+              column.innerHTML += `
+              <p> ${flightStatus} ${flightNumber} ${flightIata} </p>
+              `
+              localStorage.setItem('searched', JSON.stringify(flightStatus, flightNumber, flightIata));
             });
           } else {
             console.log("No flight data available.");
@@ -222,6 +229,20 @@ async function searchApi(formatInputVal) {
     } )
 }
 
+function displaysearch() {
+    for ( var i = 0; i < localStorage.length; i++) {
+      var storedSearch = JSON.parse(localStorage.getItem("searched"));
+      const date = dayjs().date();
+      var columnId = `day-${date}`;
+     var column = document.getElementById(columnId);
+     column.innerHTML += `
+      <p> ${storedSearch}</p>
+      `;
+      console.log(storedSearch);
+    }
+  }
+
+  displaysearch();
 
 function handleSearchFormSubmit(event) {
   event.preventDefault();
