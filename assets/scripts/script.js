@@ -230,7 +230,6 @@ async function searchApi(formatInputVal) {
     } )
 }
 
-
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
