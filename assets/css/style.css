@@ -199,7 +199,7 @@ section .calender {
 }
 
 
-p {
+.days p {
   font-size: 30%;
 }
 
