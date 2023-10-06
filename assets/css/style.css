@@ -99,11 +99,16 @@ div #currency-btn {
   border-radius: .2em;
   float: right;
   min-width: 20%;
+  min-height: 35px;
 }
 
 #currency-form {
     opacity: 1;
     transition: opacity 1s;
+}
+
+#total-span {
+  margin-left: 250px;
 }
 
 section .calender {

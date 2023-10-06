@@ -63,7 +63,7 @@ convertCurrency = (data, amount) => {
     console.log(rate);
     console.log(rate * amount);
     let total = rate * amount;
-    exchangeTotal.innerText = total;
+    exchangeTotal.innerText = total.toFixed(2);
 }
 
 // form.addEventListener('submit', function (e) {
@@ -90,7 +90,7 @@ currencyForm.on ('submit', function (e) {
     // inputSource.value = ''
     // inputExchange.value = ''
     // inputAmount.value = ''
-    currencyForm[0].reset();
+    // currencyForm[0].reset();
 
 });
 
