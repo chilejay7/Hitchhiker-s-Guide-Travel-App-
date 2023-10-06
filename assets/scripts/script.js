@@ -195,16 +195,18 @@ function showModal(dateText) {
 showModal();
 getEventDate();
 
-
 // Aviation API
 var searchFormEl = document.querySelector('#airport-form');
 var formatInputEl = document.querySelector('#format-input');
+var arrivalInputEl = document.querySelector('#arrival-input');
 
 var arr_iata = "";
 var access_key = "d36d2907-0b8e-4cdf-a4d1-7d3d03d05ee1"; // Replace with your actual access key
 
-async function searchApi(formatInputVal) {
-  var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&arr_iata=${formatInputVal}`;
+async function searchApi(formatInputVal, arrivalVal) {
+
+     var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&dep_iata=${formatInputVal}&arr_iata=${arrivalVal}`
+
     const response = await fetch(queryURL)
     .then( (response) => {
         if (!response.ok) {
@@ -223,6 +225,12 @@ async function searchApi(formatInputVal) {
               const flightNumber = flight.flight_number;
               const flightIata = flight.flight_iata;
               console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
+              const date = dayjs().date();
+               var columnId = `day-${date}`;
+               var column = document.getElementById(columnId);
+               column.innerHTML += `
+               <p> ${flightStatus} ${flightNumber} ${flightIata} </p>
+               `
             });
           } else {
             console.log("No flight data available.");
@@ -230,19 +238,19 @@ async function searchApi(formatInputVal) {
     } )
 }
 
-
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
-  
+  var arrivalVal = arrivalInputEl.value
   var formatInputVal = formatInputEl.value
-console.log(formatInputVal);
+
+console.log(formatInputVal, arrivalVal);
   if (!formatInputVal) {
     console.error('You need a search input value!');
     return;
   }
 
-  searchApi(formatInputVal);
+  searchApi(formatInputVal, arrivalVal);
 }
 
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
