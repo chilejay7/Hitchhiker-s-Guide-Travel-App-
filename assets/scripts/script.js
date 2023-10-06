@@ -110,7 +110,9 @@ changeOpacity = () => {
 // const viewEntry = document.querySelector("#viewEntry");
 let navigation = 0;
 let clicked = null;
+
 // The below localstorage pulls in the flight data from local storage.
+
 let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
