@@ -105,136 +105,143 @@ changeOpacity = () => {
     }
 };
 
-// const calendar = document.querySelector("#calendar");
-// const month = document.querySelector("#month");
-// const viewEntry = document.querySelector("#viewEntry");
-// let navigation = 0;
-// let clicked = null;
-// let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
-// const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-// // const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const calendar = document.querySelector("#calendar");
+const month = document.querySelector("#month");
+const viewEntry = document.querySelector("#viewEntry");
+let navigation = 0;
+let clicked = null;
+let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(getExchange, flight)) : [];
+const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+// const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-// dayjs()
+// dayjs(day)
 
-// function getEventDate() {
-//     const dt = new Date();
+function getEventDate() {
+    const dt = new Date();
   
-//     // if (navigation != 0) {
-//     //   dt.setMonth(new Date().getMonth() + navigation);
-//     // }
+    // if (navigation != 0) {
+    //   dt.setMonth(new Date().getMonth() + navigation);
+    // }
     
-//     const day= dt.getDate();
-//     const month = dt.getMonth();
-//     console.log(month);
-//     const year = dt.getFullYear();
+    const day= dt.getDate();
+    console.log(day);
+    const month = dt.getMonth();
+    console.log(month);
+    const year = dt.getFullYear();
+    console.log(year);
 
-//     // monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
-//     //   month: "long",
-//     // })} ${year}`;
+    // monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
+    //   month: "long",
+    // })} ${year}`;
 
-//     calendar.innerHTML = "";
-//     const dayOfMonth = new Date(year, month + 1,0).getDate();
-//     const firstDayofMonth = new Date(year, month, 1);
-//     const dateText = firstDayofMonth.toLocaleDateString("en-us", {
-//       weekday: "long",
-//       year: "numeric",
-//       month: "numeric",
-//       day: "numeric",
-//     })
+    calendar.innerHTML = "";
+    const dayOfMonth = new Date(year, month + 1,0).getDate();
+    const firstDayofMonth = new Date(year, month, 1);
+    console.log(firstDayofMonth);
+    const dateText = firstDayofMonth.toLocaleDateString("en-us", {
+      weekday: "long",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    })
 
-//     const dayString = dateText.split(", ")[0];
-//     const emptyDays = weekdays.indexOf(dayString);
+    const dayString = dateText.split(", ")[0];
+    const emptyDays = weekdays.indexOf(dayString);
 
-//     for (let i = 1; i <= dayOfMonth + emptyDays; i++) {
-//     const dayBox = document.createElement("div");
-//     dayBox.classList.add("day");
-//     const monthVal = month;
-//     const dateVal = i - emptyDays < 31 ? "0" + (i - emptyDays) : i - emptyDays;
-//     const dateText = `${dateVal}-${monthVal}-${year}`;
-//     if (i > emptyDays) {
-//         dayBox.innerText = i - emptyDays;
-//         const eventOfTheDay = events.find((e) => e.date == dateText);
+    for (let i = 1; i <= dayOfMonth + emptyDays; i++) {
+    const dayBox = document.createElement("div");
+    dayBox.classList.add("day");
+    const monthVal = month;
+    const dateVal = i - emptyDays < 31 ? "0" + (i - emptyDays) : i - emptyDays;
+    const dateText = `${dateVal}-${monthVal}-${year}`;
+    console.log(dateVal);
 
-//         if (i - emptyDays === day && navigation == 0) {
-//         dayBox.id = "currentDay";
-//         }
+    if (i > emptyDays) {
+        dayBox.innerText = i - emptyDays;
+        const eventOfTheDay = events.find((e) => e.date == dateText);
 
-//         if (eventOfTheDay) {
-//         const eventDiv = document.createElement("div");
-//         eventDiv.classList.add("event");
-//         eventDiv.innerText = eventOfTheDay.title;
-//         dayBox.appendChild(eventDiv);
-//         }
+        if (i - emptyDays === day && navigation == 0) {
+        dayBox.id = "currentDay";
+        }
 
-//         dayBox.addEventListener("click", () => {
-//         showModal(dateText);
-//         });
-//     } else {
-//         dayBox.classList.add("plain");
-//     }
-//     calendar.append(dayBox);
-//     }
-// };
+        if (eventOfTheDay) {
+        const eventDiv = document.createElement("div");
+        eventDiv.classList.add(events);
+        eventDiv.innerText = eventOfTheDay.title;
+        dayBox.appendChild(eventDiv);
+        }
 
-// function showModal(dateText) {
-//       clicked = dateText;
-//       const eventOfTheDay = events.find((e) => e.date == dateText);
-//       if (eventOfTheDay) {
-//         document.querySelector("#days").innerText = eventOfTheDay.title;
-//         viewEntry.style.display = "block";
-//       }
-// }
-// showModal();
-// getEventDate();
+        dayBox.addEventListener("click", () => {
+        showModal(dateText);
 
+        });
 
-// // Aviation API
-// var searchFormEl = document.querySelector('#airport-form');
-// var formatInputEl = document.querySelector('#format-input');
+    } else {
+        dayBox.classList.add("plain");
+    }
+    calendar.append(dayBox);
+    }
+};
 
-// var arr_iata = "";
-// var access_key = "d36d2907-0b8e-4cdf-a4d1-7d3d03d05ee1"; // Replace with your actual access key
-
-// async function searchApi(formatInputVal) {
-//   var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&arr_iata=${formatInputVal}`;
-//     const response = await fetch(queryURL)
-//     .then( (response) => {
-//         if (!response.ok) {
-//             throw new Error(`API request failed with status: ${response.status}`);
-//         }
-//         return response.json()
-//     })
-//     .then( (res) =>{
-//         var data = res.response
-//         if (Array.isArray(data) && data.length > 0) {
-//             // Iterate through flights and log their statuses
-//             console.log(data);
-//             data.forEach((flight) => {
-//             //   console.log(flight)
-//               const flightStatus = flight.status;
-//               const flightNumber = flight.flight_number;
-//               const flightIata = flight.flight_iata;
-//               console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
-//             });
-//           } else {
-//             console.log("No flight data available.");
-//           }
-//     } )
-// }
+function showModal(dateText) {
+      clicked = dateText;
+      const eventOfTheDay = events.find((e) => e.date == dateText);
+      console.log(eventOfTheDay);
+      if (eventOfTheDay) {
+        document.querySelector("#days").innerText = eventOfTheDay.title;
+        viewEntry.style.display = "block";
+      }
+}
+showModal();
+getEventDate();
 
 
-// function handleSearchFormSubmit(event) {
-//   event.preventDefault();
+// Aviation API
+var searchFormEl = document.querySelector('#airport-form');
+var formatInputEl = document.querySelector('#format-input');
+
+var arr_iata = "";
+var access_key = "d36d2907-0b8e-4cdf-a4d1-7d3d03d05ee1"; // Replace with your actual access key
+
+async function searchApi(formatInputVal) {
+  var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&arr_iata=${formatInputVal}`;
+    const response = await fetch(queryURL)
+    .then( (response) => {
+        if (!response.ok) {
+            throw new Error(`API request failed with status: ${response.status}`);
+        }
+        return response.json()
+    })
+    .then( (res) =>{
+        var data = res.response
+        if (Array.isArray(data) && data.length > 0) {
+            // Iterate through flights and log their statuses
+            console.log(data);
+            data.forEach((flight) => {
+            //   console.log(flight)
+              const flightStatus = flight.status;
+              const flightNumber = flight.flight_number;
+              const flightIata = flight.flight_iata;
+              console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
+            });
+          } else {
+            console.log("No flight data available.");
+          }
+    } )
+}
+
+function handleSearchFormSubmit(event) {
+  event.preventDefault();
 
   
-//   var formatInputVal = formatInputEl.value
-// console.log(formatInputVal);
-//   if (!formatInputVal) {
-//     console.error('You need a search input value!');
-//     return;
-//   }
+  var formatInputVal = formatInputEl.value
+console.log(formatInputVal);
+  if (!formatInputVal) {
+    console.error('You need a search input value!');
+    return;
+  }
 
-//   searchApi(formatInputVal);
-// }
+  searchApi(formatInputVal);
+}
 
-// searchFormEl.addEventListener('submit', handleSearchFormSubmit);
+searchFormEl.addEventListener('submit', handleSearchFormSubmit);
