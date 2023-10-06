@@ -98,6 +98,7 @@ div #currency-btn {
   padding: 5px;
   border-radius: .2em;
   float: right;
+  min-width: 20%;
 }
 
 #currency-form {
@@ -118,6 +119,7 @@ section .calender {
   width: 100%;
   height: 5px;
   background: linear-gradient(90deg,#0d1321, #0077b6, #0d1321);
+  font-weight: bold;
   text-align: center;
   justify-content: center;
 }
