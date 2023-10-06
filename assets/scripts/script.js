@@ -63,7 +63,7 @@ convertCurrency = (data, amount) => {
     console.log(rate);
     console.log(rate * amount);
     let total = rate * amount;
-    exchangeTotal.innerText = total;
+    exchangeTotal.innerText = total.toFixed(2);
 }
 
 // form.addEventListener('submit', function (e) {
@@ -90,7 +90,7 @@ currencyForm.on ('submit', function (e) {
     // inputSource.value = ''
     // inputExchange.value = ''
     // inputAmount.value = ''
-    currencyForm[0].reset();
+    // currencyForm[0].reset();
 
 });
 
@@ -110,7 +110,7 @@ changeOpacity = () => {
 // const viewEntry = document.querySelector("#viewEntry");
 let navigation = 0;
 let clicked = null;
-// The below localstorage pulls in the flight data from local storage
+// The below localstorage pulls in the flight data from local storage.
 let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -120,18 +120,13 @@ dayjs()
 
 // The following function defines the current date (day/month/year) by pulling in new Date() and
 // displays events in box form while following the criteria of the if statements and the for loop
+
 function getEventDate() {
-    const dt = new Date();   
+    const dt = new Date();
     const day= dt.getDate();
     const month = dt.getMonth();
     console.log(month);
     const year = dt.getFullYear();
-
-    // monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
-    //   month: "long",
-    // })} ${year}`;
-
-    // calendar.innerHTML = "";
     const dayOfMonth = new Date(year, month + 1,0).getDate();
     const firstDayofMonth = new Date(year, month, 1);
     const dateText = firstDayofMonth.toLocaleDateString("en-us", {
@@ -171,6 +166,7 @@ function getEventDate() {
     } else {
         dayBox.classList.add("plain");
     }
+
     }
 };
 
@@ -188,12 +184,11 @@ getEventDate();
 // Airlabs API
 var searchFormEl = document.querySelector('#airport-form');
 var formatInputEl = document.querySelector('#format-input');
-
+var arrivalInputEl = document.querySelector('#arrival-input');
 var arr_iata = "";
 var access_key = "d36d2907-0b8e-4cdf-a4d1-7d3d03d05ee1"; // Replace with your actual access key
-
-async function searchApi(formatInputVal) {
-  var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&arr_iata=${formatInputVal}`;
+async function searchApi(formatInputVal, arrivalVal) {
+     var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&dep_iata=${formatInputVal}&arr_iata=${arrivalVal}`
     const response = await fetch(queryURL)
     .then( (response) => {
         if (!response.ok) {
@@ -208,30 +203,48 @@ async function searchApi(formatInputVal) {
             console.log(data);
             data.forEach((flight) => {
             //   console.log(flight)
-              const flightStatus = flight.status;
-              const flightNumber = flight.flight_number;
-              const flightIata = flight.flight_iata;
-              console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
-            });
-          } else {
-            console.log("No flight data available.");
-          }
-    } )
+            const flightStatus = flight.status;
+            const flightNumber = flight.flight_number;
+            const flightIata = flight.flight_iata;
+            console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
+            const date = dayjs().date();
+            var columnId = `day-${date}`;
+            var column = document.getElementById(columnId);
+            column.innerHTML += `
+            <p> ${flightStatus} ${flightNumber} ${flightIata} </p>
+            `
+            // localStorage.setItem('searched', JSON.stringify(flightStatus, flightNumber, flightIata));
+          });
+        } else {
+          console.log("No flight data available.");
+        }
+  } )
 }
 
+// function displaysearch() {
+//   for ( var i = 0; i < localStorage.length; i++) {
+//     var storedSearch = JSON.parse(localStorage.getItem("searched"));
+//     const date = dayjs().date();
+//     var columnId = `day-${date}`;
+//    var column = document.getElementById(columnId);
+//    column.innerHTML += `
+//     <p> ${storedSearch}</p>
+//     `;
+//     console.log(storedSearch);
+//   }
+// }
+
+// displaysearch();
 
 function handleSearchFormSubmit(event) {
   event.preventDefault();
-
-  
+  var arrivalVal = arrivalInputEl.value
   var formatInputVal = formatInputEl.value
-console.log(formatInputVal);
+console.log(formatInputVal, arrivalVal);
   if (!formatInputVal) {
     console.error('You need a search input value!');
     return;
   }
-
-  searchApi(formatInputVal);
+  searchApi(formatInputVal, arrivalVal);
 }
-
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
