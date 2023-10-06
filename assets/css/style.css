@@ -89,13 +89,24 @@ div #currency-btn {
     text-align: center;
 }
 
+#exchange-total {
+  /* display: inline-block; */
+  font-size: 1.3rem;
+  background-color: white;
+  border: solid black 1px;
+  margin-top: 2%;
+  padding: 5px;
+  border-radius: .2em;
+  float: right;
+}
+
 #currency-form {
     opacity: 1;
     transition: opacity 1s;
 }
 
 section .calender {
-    font-family: Verdana, sans-serif;
+    /* font-family: Verdana, sans-serif; */
     margin: 20px;
 }
 
@@ -154,6 +165,7 @@ section .calender {
   padding: 10px 0;
   background-color: teal;
   font-size: 30px;
+  flex-wrap: wrap;
   box-sizing: border-box;
   border: 20px black;
 }
@@ -185,4 +197,18 @@ section .calender {
   font-size: 30px;
   color: black;
 }
+
+
+p {
+  font-size: 30%;
+}
+
+.footer {
+  background-color: #F1F1F1;
+  text-align: center;
+  padding: 10px;
+    font-size: 8px;
+
+}
+
 

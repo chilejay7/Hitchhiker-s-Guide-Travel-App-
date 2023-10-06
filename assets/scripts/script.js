@@ -110,85 +110,127 @@ const month = document.querySelector("#month");
 const viewEntry = document.querySelector("#viewEntry");
 let navigation = 0;
 let clicked = null;
-let entry = localStorage.getItem("entry") ? JSON.parse(localStorage.getItem("entry")) : [];
+let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(getExchange, flight)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+// const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-function getCalendar() {
+// dayjs(day)
+
+function getEventDate() {
     const dt = new Date();
   
-    if (navigation != 0) {
-      dt.setMonth(new Date().getMonth() + navigation);
-    }
-    const day = dt.getDate();
+    // if (navigation != 0) {
+    //   dt.setMonth(new Date().getMonth() + navigation);
+    // }
+    
+    const day= dt.getDate();
+    console.log(day);
     const month = dt.getMonth();
     console.log(month);
     const year = dt.getFullYear();
-    monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
-      month: "long",
-    })} ${year}`;
+    console.log(year);
+
+    // monthBanner.innerText = `${dt.toLocaleDateString("en-us", {
+    //   month: "long",
+    // })} ${year}`;
+
     calendar.innerHTML = "";
     const dayOfMonth = new Date(year, month + 1,0).getDate();
     const firstDayofMonth = new Date(year, month, 1);
+    console.log(firstDayofMonth);
     const dateText = firstDayofMonth.toLocaleDateString("en-us", {
       weekday: "long",
       year: "numeric",
       month: "numeric",
       day: "numeric",
     })
+
+    const dayString = dateText.split(", ")[0];
+    const emptyDays = weekdays.indexOf(dayString);
+
+    for (let i = 1; i <= dayOfMonth + emptyDays; i++) {
+    const dayBox = document.createElement("div");
+    dayBox.classList.add("day");
+    const monthVal = month;
+    const dateVal = i - emptyDays < 31 ? "0" + (i - emptyDays) : i - emptyDays;
+    const dateText = `${dateVal}-${monthVal}-${year}`;
+    console.log(dateVal);
+
+    if (i > emptyDays) {
+        dayBox.innerText = i - emptyDays;
+        const eventOfTheDay = events.find((e) => e.date == dateText);
+
+        if (i - emptyDays === day && navigation == 0) {
+        dayBox.id = "currentDay";
+        }
+
+        if (eventOfTheDay) {
+        const eventDiv = document.createElement("div");
+        eventDiv.classList.add(events);
+        eventDiv.innerText = eventOfTheDay.title;
+        dayBox.appendChild(eventDiv);
+        }
+
+        dayBox.addEventListener("click", () => {
+        showModal(dateText);
+
+        });
+
+    } else {
+        dayBox.classList.add("plain");
+    }
+    calendar.append(dayBox);
+    }
 };
 
 function showModal(dateText) {
       clicked = dateText;
-    //   const eventOfTheDay = events.find((e) => e.date == dateText);
-    //   if (eventOfTheDay) {
-    //     document.querySelector("#days").innerText = eventOfTheDay.title;
-    //     viewEntry.style.display = "block";
-    //   }
+      const eventOfTheDay = events.find((e) => e.date == dateText);
+      console.log(eventOfTheDay);
+      if (eventOfTheDay) {
+        document.querySelector("#days").innerText = eventOfTheDay.title;
+        viewEntry.style.display = "block";
+      }
 }
-
-function buttons() {
-    const btnBack = document.querySelector("#btnBack");
-    const btnNext = document.querySelector("#btnNext");
-  
-    btnBack.addEventListener("click", () => {
-      navigation--;
-      getCalendar();
-    });
-    btnNext.addEventListener("click", () => {
-      navigation++;
-      getCalendar();
-    });
-
-}
-  showModal();
-  buttons();
+showModal();
+getEventDate();
 
 // Aviation API
-var arr_iata = "LAX";
-var access_key = "d36d2907-0b8e-4cdf-a4d1-7d3d03d05ee1"; // Replace with your actual access key
-var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&arr_iata=${arr_iata}`;
+var searchFormEl = document.querySelector('#airport-form');
+var formatInputEl = document.querySelector('#format-input');
+var arrivalInputEl = document.querySelector('#arrival-input');
 
-async function makeAPICall() {
+var arr_iata = "";
+var access_key = "d36d2907-0b8e-4cdf-a4d1-7d3d03d05ee1"; // Replace with your actual access key
+
+async function searchApi(formatInputVal, arrivalVal) {
+
+     var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&dep_iata=${formatInputVal}&arr_iata=${arrivalVal}`
+
     const response = await fetch(queryURL)
     .then( (response) => {
         if (!response.ok) {
             throw new Error(`API request failed with status: ${response.status}`);
         }
-
         return response.json()
     })
     .then( (res) =>{
         var data = res.response
-
         if (Array.isArray(data) && data.length > 0) {
             // Iterate through flights and log their statuses
-            data.forEach((flight) => {    
+            console.log(data);
+            data.forEach((flight) => {
             //   console.log(flight)
               const flightStatus = flight.status;
               const flightNumber = flight.flight_number;
               const flightIata = flight.flight_iata;
               console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
+              const date = dayjs().date();
+               var columnId = `day-${date}`;
+               var column = document.getElementById(columnId);
+               column.innerHTML += `
+               <p> ${flightStatus} ${flightNumber} ${flightIata} </p>
+               `
             });
           } else {
             console.log("No flight data available.");
@@ -196,6 +238,19 @@ async function makeAPICall() {
     } )
 }
 
-makeAPICall()
+function handleSearchFormSubmit(event) {
+  event.preventDefault();
 
+  var arrivalVal = arrivalInputEl.value
+  var formatInputVal = formatInputEl.value
 
+console.log(formatInputVal, arrivalVal);
+  if (!formatInputVal) {
+    console.error('You need a search input value!');
+    return;
+  }
+
+  searchApi(formatInputVal, arrivalVal);
+}
+
+searchFormEl.addEventListener('submit', handleSearchFormSubmit);
