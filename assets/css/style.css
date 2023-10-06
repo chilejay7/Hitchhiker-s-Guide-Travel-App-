@@ -187,6 +187,17 @@ section .calender {
   color: black;
 }
 
+
 p {
-  font-size: 50%;
+  font-size: 30%;
 }
+
+.footer {
+  background-color: #F1F1F1;
+  text-align: center;
+  padding: 10px;
+    font-size: 8px;
+
+}
+
+
