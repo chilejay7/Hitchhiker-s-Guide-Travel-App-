@@ -187,8 +187,7 @@ function showModal(dateText) {
 showModal();
 getEventDate();
 
-
-// Aviation API
+// Airlabs API
 var searchFormEl = document.querySelector('#airport-form');
 var formatInputEl = document.querySelector('#format-input');
 
