@@ -110,6 +110,7 @@ changeOpacity = () => {
 // const viewEntry = document.querySelector("#viewEntry");
 let navigation = 0;
 let clicked = null;
+// The below localstorage pulls in the flight data from local storage
 let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -117,13 +118,10 @@ const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 
 dayjs()
 
+// The following function defines the current date (day/month/year) by pulling in new Date() and
+// displays events in box form while following the criteria of the if statements and the for loop
 function getEventDate() {
-    const dt = new Date();
-  
-    // if (navigation != 0) {
-    //   dt.setMonth(new Date().getMonth() + navigation);
-    // }
-    
+    const dt = new Date();   
     const day= dt.getDate();
     const month = dt.getMonth();
     console.log(month);
@@ -173,7 +171,6 @@ function getEventDate() {
     } else {
         dayBox.classList.add("plain");
     }
-    // calendar.append(dayBox);
     }
 };
 
