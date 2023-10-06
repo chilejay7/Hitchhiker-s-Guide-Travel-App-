@@ -114,7 +114,7 @@ let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(ge
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-dayjs()
+// dayjs(day)
 
 function getEventDate() {
     const dt = new Date();
@@ -126,7 +126,7 @@ function getEventDate() {
     const day= dt.getDate();
     console.log(day);
     const month = dt.getMonth();
-    // console.log(month);
+    console.log(month);
     const year = dt.getFullYear();
     console.log(year);
 
@@ -134,7 +134,7 @@ function getEventDate() {
     //   month: "long",
     // })} ${year}`;
 
-    // calendar.innerHTML = "";
+    calendar.innerHTML = "";
     const dayOfMonth = new Date(year, month + 1,0).getDate();
     const firstDayofMonth = new Date(year, month, 1);
     console.log(firstDayofMonth);
@@ -179,7 +179,7 @@ function getEventDate() {
     } else {
         dayBox.classList.add("plain");
     }
-    // calendar.append(dayBox);
+    calendar.append(dayBox);
     }
 };
 
@@ -194,7 +194,6 @@ function showModal(dateText) {
 }
 showModal();
 getEventDate();
-
 
 // Aviation API
 var searchFormEl = document.querySelector('#airport-form');
