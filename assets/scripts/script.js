@@ -113,6 +113,7 @@ let clicked = null;
 let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 // const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+// inputAmount, arrivalVal
 
 dayjs()
 
@@ -132,7 +133,7 @@ function getEventDate() {
     //   month: "long",
     // })} ${year}`;
 
-    calendar.innerHTML = "";
+    // calendar.innerHTML = "";
     const dayOfMonth = new Date(year, month + 1,0).getDate();
     const firstDayofMonth = new Date(year, month, 1);
     const dateText = firstDayofMonth.toLocaleDateString("en-us", {
@@ -172,7 +173,7 @@ function getEventDate() {
     } else {
         dayBox.classList.add("plain");
     }
-    calendar.append(dayBox);
+    // calendar.append(dayBox);
     }
 };
 
