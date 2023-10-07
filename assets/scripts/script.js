@@ -19,7 +19,7 @@ getList = () => {
     })
 }
 
-// This adds an autocomplete list.
+// This adds an autocomplete list to the currency form.
 $(function () {
     $('#source-currency, #exchange-currency').autocomplete({
         source: autoCurrency,
@@ -50,12 +50,6 @@ getExchange = (from, to, amount) => {
         })
 };
 
-
-// form1.addEventListener('submit', function (e) {
-//     console.log(e);
-// })
-
-
 // This function converts the currency amount to be exchanged.  The data argument is set to accept the data fromt the API response.  Amount is defined as an argument to be used with the input value needing to be exchanged.  The quotes object returned from the data contains the exchange rate.  This is multiplied by the inputAmount.value is passed from the getExchange function's arguments.
 convertCurrency = (data, amount) => {
     let quotes = Object.values(data.quotes);
@@ -67,9 +61,24 @@ convertCurrency = (data, amount) => {
     exchangeTotal.innerText = total.toFixed(2);
 }
 
-// form.addEventListener('submit', function (e) {
-//     console.log(e);
-// })
+let currenciesExchanged = {};
+
+setStorage = (currency, amount) => {
+    currenciesExchanged[currency] = amount;
+    localStorage.setItem('currencies', JSON.stringify(currenciesExchanged));
+}
+
+checkStorage = () => {
+    if (getStorage() === null || getStorage() === 'undefined') {
+        return currenciesExchanged = {};
+    } else {
+        return getStorage();
+    }
+}
+
+getStorage = () => {
+    currenciesExchanged = JSON.parse(localStorage.getItem('currencies'));
+}
 
 currencyForm.on ('submit', function (e) {
     // let inputSource = $('#source-currency').val()
@@ -96,7 +105,7 @@ currencyForm.on ('submit', function (e) {
 
 });
 
-// This function will fade elements in and out.  It can be used to with any element and easily be tied to an event listener.
+// This function will fade elements in and out.  It could be used to with any element and easily be tied to an event listener.
 changeOpacity = () => {
     const hiddenForm = document.getElementById('currency-form');
 

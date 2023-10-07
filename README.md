@@ -19,7 +19,7 @@ SO THAT I can find a flight
 And Plan how much money I will need
 
 
-## -- Acceptance Criteria --
+## Acceptance Criteria
 It is DONE when I load the page, and I'm presented with an interactive calendar.
 
 It is DONE when I load the page, and I'm presented with a navigation menu that gives me accessiblity to different features of the application.
@@ -37,7 +37,7 @@ A screenshot of the application has been included below for reference.  There ar
 
 The Currency Exchange form provides three input fields.  The first is the currency the user would like to exchange from, the second is the currency it will be converted to, and the third is the amount to be exchanged.  The from and to fields use an autocomplete function with currency abbreviations stored in an array to make the application easier to use.  A submit event listener captures the input values from the form to provide a conversion using data from the Forex API.  The amount is rounded to two decimal places to provide a standard currency value.  The form does not clear the input fields after the conversion in order to allow the user to enter different amounts if needed without losing the previuos currency selections.
 
-The calendar provides a location where data related to the flight information selected can be displayed.  Data returned by the Aviation API 
+The calendar provides a location where data related to the flight information selected can be displayed.  Data returned by the Aviation API is written to the corresponding dates on the calendar.
 
 ![Screenshot1](./assets/images/HitchhikersGuide_Application.png)
 
