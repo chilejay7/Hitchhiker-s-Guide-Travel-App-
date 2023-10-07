@@ -5,7 +5,7 @@ The Hitchhiker's Guide is a project that was a collaborative effort to build an 
 
 ## Technologies Used:
 -[Free Forex API](https://freeforexapi.com/)<br>
--[AviationStack API](https://aviationstack.com/documentation)<br>
+-[AirLabs API](https://airlabs.co/)<br>
 
 ## Deployed Application:
 [Hitchhiker's Guide](https://chilejay7.github.io/Hitchhiker-s-Guide-Travel-App-/)
@@ -33,7 +33,7 @@ It is DONE when I can input data that gets saved to LocalStorage via the applica
 
 ## Usage:
 
-A screenshot of the application has been included below for reference.  There are three main parts that combine to create the Hitchhiker's Guide: the flight search form, the currency converter, and the calendar.  Each section is linked in the navigation menu within the header.  Clicking on the link will take the user to the corresponding section.  In the Airport search from, airports can be selected using the dropdown menus.  The AviationStack API is used to pull flight information based on the departing airport, the first selector in the Airport Search form.  The second selector represents the destination airport and, together with the first selection made, provides flight information between the two locations.  The data provided by the AviationAPI server is then saved to the calendar.
+A screenshot of the application has been included below for reference.  There are three main parts that combine to create the Hitchhiker's Guide: the flight search form, the currency converter, and the calendar.  Each section is linked in the navigation menu within the header.  Clicking on the link will take the user to the corresponding section.  In the Airport search from, airports can be selected using the dropdown menus.  The AirLabs API is used to pull flight information based on the departing airport, the first selector in the Airport Search form.  The second selector represents the destination airport and, together with the first selection made, provides flight information between the two locations.  The data provided by the AirLabs API server is then saved to the calendar.
 
 The Currency Exchange form provides three input fields.  The first is the currency the user would like to exchange from, the second is the currency it will be converted to, and the third is the amount to be exchanged.  The from and to fields use an autocomplete function with currency abbreviations stored in an array to make the application easier to use.  A submit event listener captures the input values from the form to provide a conversion using data from the Forex API.  The amount is rounded to two decimal places to provide a standard currency value.  The form does not clear the input fields after the conversion in order to allow the user to enter different amounts if needed without losing the previuos currency selections.
 
