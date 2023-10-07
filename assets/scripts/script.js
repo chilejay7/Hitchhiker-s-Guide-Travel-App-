@@ -43,11 +43,13 @@ getExchange = (from, to, amount) => {
             console.log(response);
             return response.json();
         })
-        .then(function (data) {
+        .then(async function (data) {
             console.log(data);
-            // func1(data, amount);
-            convertCurrency(data, amount);
+            
+            await convertCurrency(data, amount);
         })
+    // This adds a key value pair to the currenciesExchanged object using the captured values from the form.
+    // currenciesExchanged[`${from} (${amount}) to ${to}`] = exchangeTotal.innerHTML;
 };
 
 // This function converts the currency amount to be exchanged.  The data argument is set to accept the data fromt the API response.  Amount is defined as an argument to be used with the input value needing to be exchanged.  The quotes object returned from the data contains the exchange rate.  This is multiplied by the inputAmount.value is passed from the getExchange function's arguments.
@@ -59,12 +61,15 @@ convertCurrency = (data, amount) => {
     console.log(rate * amount);
     let total = rate * amount;
     exchangeTotal.innerText = total.toFixed(2);
+    // This adds a key value pair to the currenciesExchanged object using the captured values from the form.  It needs to be placed here due to the dynamically generated conversion value that needs the fetch data.  Placing this outside of the function results in an empty value or a value behind the current conversion amount.  The setStorage function needs to be placed within this function as well.
+    currenciesExchanged[`${inputSource.value} (${inputAmount.value}) to ${inputExchange.value}`] = exchangeTotal.innerText;
+    setStorage();
 }
 
+// The code below sets an empty object used to store currency and exchange amount pairs.
 let currenciesExchanged = {};
 
-setStorage = (currency, amount) => {
-    currenciesExchanged[currency] = amount;
+setStorage = () => {
     localStorage.setItem('currencies', JSON.stringify(currenciesExchanged));
 }
 
@@ -80,30 +85,28 @@ getStorage = () => {
     currenciesExchanged = JSON.parse(localStorage.getItem('currencies'));
 }
 
-currencyForm.on ('submit', function (e) {
+currencyForm.on ('submit', async function (e) {
     // let inputSource = $('#source-currency').val()
     console.log(inputSource.value);
     console.log(inputExchange.value); 
     console.log(inputAmount.value); 
 
     // This will store values of previously used currencies.  We could also use the free Forex API to store previously used pairs and recall exchange rates with buttons or some other means.
-    sourceCurrencies.push(inputSource);
-    exchangeCurrencies.push(inputExchange);
+    // sourceCurrencies.push(inputSource);
+    // exchangeCurrencies.push(inputExchange);
 
     // getExchange(inputSource.value, inputExchange.value, convertCurrency, inputAmount.value);
     getExchange(inputSource.value, inputExchange.value, inputAmount.value);
 
-    // console.log('This ran already.');
+    // setStorage();
 
-    // convertCurrency(data);
-
-    // This resets the forms input fields on submit.
-    // inputSource.value = ''
-    // inputExchange.value = ''
-    // inputAmount.value = ''
+     // This resets the forms input fields on submit.
     // currencyForm[0].reset();
 
+
 });
+
+
 
 // This function will fade elements in and out.  It could be used to with any element and easily be tied to an event listener.
 changeOpacity = () => {
