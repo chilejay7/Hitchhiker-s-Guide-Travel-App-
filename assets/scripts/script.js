@@ -91,16 +91,10 @@ currencyForm.on ('submit', async function (e) {
     console.log(inputExchange.value); 
     console.log(inputAmount.value); 
 
-    // This will store values of previously used currencies.  We could also use the free Forex API to store previously used pairs and recall exchange rates with buttons or some other means.
-    // sourceCurrencies.push(inputSource);
-    // exchangeCurrencies.push(inputExchange);
-
     // getExchange(inputSource.value, inputExchange.value, convertCurrency, inputAmount.value);
     getExchange(inputSource.value, inputExchange.value, inputAmount.value);
 
-    // setStorage();
-
-     // This resets the forms input fields on submit.
+    // This resets the forms input fields on submit.
     // currencyForm[0].reset();
 
 
