@@ -42,7 +42,10 @@ The calendar provides a location where data related to the flight information se
 ![Screenshot1](./assets/images/HitchhikersGuide_Application.png)
 
 ## Sources:
-https://www.geeksforgeeks.org/how-to-get-the-number-of-days-in-a-specified-month-using-javascript/
+Calendar Source - https://www.geeksforgeeks.org/how-to-get-the-number-of-days-in-a-specified-month-using-javascript/
+Calendar Source - https://www.jeasyui.com/documentation/datebox.php
+Calendar Source - https://medium.com/@nitinpatel_20236/challenge-of-building-a-calendar-with-pure-javascript-a86f1303267d
+Calendar Source - https://www.w3schools.com/howto/howto_css_calendar.asp
 
 ## License:
 MIT License
