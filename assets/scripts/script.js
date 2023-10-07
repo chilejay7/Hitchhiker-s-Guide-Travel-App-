@@ -37,7 +37,7 @@ let sourceCurrencies = [];
 let exchangeCurrencies = [];
 
 // This function will pull exchange rate information from the Forex API.  The currency and source variables will defined based on user input and incorporated into the function to create the parameters needed.  Multiple arguments had to be defined.  From and to are used to pass the input currency values into the function.  func1 accepts a function, which will be the convertCurrency function, to give that function access to the API's data.  Amount passes the input amount to the func1 argument, which will be converted for use in the convertCurrency function.
-getExchange = (from, to, func1, amount) => {
+getExchange = (from, to, amount) => {
     fetch (`http://apilayer.net/api/live?access_key=e05cba2b74e776b6e26de31af283e09f&source=${from}&currencies=${to}`)
         .then(function (response) {
             console.log(response);
@@ -45,7 +45,8 @@ getExchange = (from, to, func1, amount) => {
         })
         .then(function (data) {
             console.log(data);
-            func1(data, amount)
+            // func1(data, amount);
+            convertCurrency(data, amount);
         })
 };
 
@@ -80,7 +81,8 @@ currencyForm.on ('submit', function (e) {
     sourceCurrencies.push(inputSource);
     exchangeCurrencies.push(inputExchange);
 
-    getExchange(inputSource.value, inputExchange.value, convertCurrency, inputAmount.value);
+    // getExchange(inputSource.value, inputExchange.value, convertCurrency, inputAmount.value);
+    getExchange(inputSource.value, inputExchange.value, inputAmount.value);
 
     // console.log('This ran already.');
 

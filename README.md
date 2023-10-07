@@ -11,13 +11,12 @@ The Hitchhiker's Guide is a project that was a collaborative effort to build an 
 [Hitchhiker's Guide](https://chilejay7.github.io/Hitchhiker-s-Guide-Travel-App-/)
 
 
-## -- User Story --
-As a user, I want to have a lot of relevant information or tools regarding my trip in one application.
-As a user, I want to be able to see information about my airport: delays, weather, and useful info for my departure / arrival.
-
-As a user, I want to be able to see current prices and conversion rates for multiple currencies.
-
-As a user, I want to be able input data into a calendar, and be able to leave the page without losing the data.
+## User Story
+AS A person who travels often
+I WANT to see the flight information for destination cities
+And exchange rates for different currencies
+SO THAT I can find a flight
+And Plan how much money I will need
 
 
 ## -- Acceptance Criteria --
