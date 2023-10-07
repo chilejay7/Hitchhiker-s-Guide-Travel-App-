@@ -77,6 +77,7 @@ setStorage = () => {
     localStorage.setItem('currencies', JSON.stringify(currenciesExchanged));
 }
 
+// This function is called within the document ready function when the page loads.
 checkStorage = () => {
     if (getStorage() === null || getStorage() === 'undefined') {
         return currenciesExchanged = {};
