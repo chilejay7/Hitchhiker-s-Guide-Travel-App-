@@ -211,15 +211,22 @@ async function searchApi(formatInputVal) {
             console.log(data);
             data.forEach((flight) => {
             //   console.log(flight)
-              const flightStatus = flight.status;
-              const flightNumber = flight.flight_number;
-              const flightIata = flight.flight_iata;
-              console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
-            });
-          } else {
-            console.log("No flight data available.");
-          }
-    } )
+            const flightStatus = flight.status;
+            const flightNumber = flight.flight_number;
+            const flightIata = flight.flight_iata;
+            console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
+            const date = dayjs().date();
+            var columnId = `day-${date}`;
+            var column = document.getElementById(columnId);
+            column.innerHTML += `
+            <p> ${flightStatus} ${flightNumber} ${flightIata} </p>
+            `
+            // localStorage.setItem('searched', JSON.stringify(flightStatus, flightNumber, flightIata));
+          });
+        } else {
+          console.log("No flight data available.");
+        }
+  } )
 }
 
 
