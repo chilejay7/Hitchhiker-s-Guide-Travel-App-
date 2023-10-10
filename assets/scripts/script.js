@@ -265,7 +265,7 @@ function fetchFlightInfo(flightIata) {
             Departure Delayed:${depdelay} min <br>
             Arrival Delayed:${arrdelay} min <br>
             Departure Gate:${departureGate} <br>
-            Arrival Date:${arrivalGate} <br>
+            Arrival Gate:${arrivalGate} <br>
             Current Status:${status} <br>
             Est. Flight Duration:${flightduration} min </p>
             `
