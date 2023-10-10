@@ -253,7 +253,7 @@ function fetchFlightInfo(flightIata) {
             console.log('Departure Date:', deptime);
             console.log('Departure Delayed:', depdelay, 'min');
             console.log('Departure Gate:', departureGate);
-            console.log('Arrival Date:', arrtime);
+            console.log('Arrival Gate:', arrtime);
             console.log('Arrival Delayed:', arrdelay, 'min');
             console.log('Arrival Gate:', arrivalGate);
             var date = dayjs().date();
