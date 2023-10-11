@@ -1,3 +1,17 @@
+// Function to save flight data to LocalStorage
+function saveFlightData(data) {
+    localStorage.setItem('flightData', JSON.stringify(data));
+}
+
+// Function to load flight data from LocalStorage
+function loadFlightData() {
+    const savedFlightData = localStorage.getItem('flightData');
+    if (savedFlightData) {
+        // Parse the saved data and use it to populate your calendar or display logic
+        const flightData = JSON.parse(savedFlightData);
+        // You can use flightData to populate your calendar or display logic here
+    }
+}
 
 //Submit Button for Currency Exchange
 const currencyForm = $('#currency-exchange');
@@ -7,24 +21,24 @@ const autoCurrency = ['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'A
 let currenciesExchanged = {};
 
 // This was added to retrieve previous values stored and ensure previous data is not overwritten on page refresh.
-$(document).ready (function () {
+$(document).ready(function () {
     checkStorage();
 })
 
-// The code below was used to get a list of available currencies and their three letter identifiers.
+// The code below was used to get a list of available currencies and their three-letter identifiers.
 let currencies = [];
 
 getList = () => {
-    fetch ('http://apilayer.net/api/list?access_key=e05cba2b74e776b6e26de31af283e09f')
-    .then (function (response) {
-        console.log(response);
-        return response.json();
-    })
-    .then (function (data) {
-        console.log(data);
-        currencies = Object.keys(data.currencies);
-        return currencies.reverse();
-    })
+    fetch('http://apilayer.net/api/list?access_key=e05cba2b74e776b6e26de31af283e09f')
+        .then(function (response) {
+            console.log(response);
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            currencies = Object.keys(data.currencies);
+            return currencies.reverse();
+        })
 }
 
 // This adds an autocomplete list to the currency form.
@@ -43,23 +57,23 @@ let exchangeTotal = document.getElementById('exchange-total')
 let sourceCurrencies = [];
 let exchangeCurrencies = [];
 
-// This function will pull exchange rate information from the Forex API.  The currency and source variables will defined based on user input and incorporated into the function to create the parameters needed.  Multiple arguments had to be defined.  From and to are used to pass the input currency values into the function.  func1 accepts a function, which will be the convertCurrency function, to give that function access to the API's data.  Amount passes the input amount to the func1 argument, which will be converted for use in the convertCurrency function.
+// This function will pull exchange rate information from the Forex API.  The currency and source variables will be defined based on user input and incorporated into the function to create the parameters needed.  Multiple arguments had to be defined.  From and to are used to pass the input currency values into the function.  func1 accepts a function, which will be the convertCurrency function, to give that function access to the API's data.  Amount passes the input amount to the func1 argument, which will be converted for use in the convertCurrency function.
 getExchange = (from, to, amount) => {
-    fetch (`http://apilayer.net/api/live?access_key=e05cba2b74e776b6e26de31af283e09f&source=${from}&currencies=${to}`)
+    fetch(`http://apilayer.net/api/live?access_key=e05cba2b74e776b6e26de31af283e09f&source=${from}&currencies=${to}`)
         .then(function (response) {
             console.log(response);
             return response.json();
         })
         .then(async function (data) {
             console.log(data);
-            
+
             await convertCurrency(data, amount);
         })
-    // This adds a key value pair to the currenciesExchanged object using the captured values from the form.
+    // This adds a key-value pair to the currenciesExchanged object using the captured values from the form.
     // currenciesExchanged[`${from} (${amount}) to ${to}`] = exchangeTotal.innerHTML;
 };
 
-// This function converts the currency amount to be exchanged.  The data argument is set to accept the data fromt the API response.  Amount is defined as an argument to be used with the input value needing to be exchanged.  The quotes object returned from the data contains the exchange rate.  This is multiplied by the inputAmount.value is passed from the getExchange function's arguments.
+// This function converts the currency amount to be exchanged.  The data argument is set to accept the data from the API response.  Amount is defined as an argument to be used with the input value needing to be exchanged.  The quotes object returned from the data contains the exchange rate.  This is multiplied by the inputAmount.value is passed from the getExchange function's arguments.
 convertCurrency = (data, amount) => {
     let quotes = Object.values(data.quotes);
     console.log(quotes);
@@ -68,12 +82,10 @@ convertCurrency = (data, amount) => {
     console.log(rate * amount);
     let total = rate * amount;
     exchangeTotal.innerText = total.toFixed(2);
-    // This adds a key value pair to the currenciesExchanged object using the captured values from the form.  It needs to be placed here due to the dynamically generated conversion value that needs the fetch data.  Placing this outside of the function results in an empty value or a value behind the current conversion amount.  The setStorage function needs to be placed within this function as well.
+    // This adds a key-value pair to the currenciesExchanged object using the captured values from the form.  It needs to be placed here due to the dynamically generated conversion value that needs the fetch data.  Placing this outside of the function results in an empty value or a value behind the current conversion amount.  The setStorage function needs to be placed within this function as well.
     currenciesExchanged[`${inputSource.value} (${inputAmount.value}) to ${inputExchange.value}`] = exchangeTotal.innerText;
     setStorage();
 }
-
-
 
 setStorage = () => {
     localStorage.setItem('currencies', JSON.stringify(currenciesExchanged));
@@ -92,11 +104,11 @@ getStorage = () => {
     return localStorage.getItem('currencies');
 }
 
-currencyForm.on ('submit', async function (e) {
+currencyForm.on('submit', async function (e) {
     // let inputSource = $('#source-currency').val()
     console.log(inputSource.value);
-    console.log(inputExchange.value); 
-    console.log(inputAmount.value); 
+    console.log(inputExchange.value);
+    console.log(inputAmount.value);
 
     // getExchange(inputSource.value, inputExchange.value, convertCurrency, inputAmount.value);
     getExchange(inputSource.value, inputExchange.value, inputAmount.value);
@@ -122,7 +134,7 @@ changeOpacity = () => {
 let navigation = 0;
 let clicked = null;
 
-// The below localstorage pulls in the flight data from local storage.
+// The below local storage pulls in the flight data from local storage.
 
 let events = localStorage.getItem("events") ? JSON.parse(localStorage.getItem(viewEntry)) : [];
 const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -136,65 +148,64 @@ dayjs()
 
 function getEventDate() {
     const dt = new Date();
-    const day= dt.getDate();
+    const day = dt.getDate();
     const month = dt.getMonth();
     console.log(month);
     const year = dt.getFullYear();
-    const dayOfMonth = new Date(year, month + 1,0).getDate();
+    const dayOfMonth = new Date(year, month + 1, 0).getDate();
     const firstDayofMonth = new Date(year, month, 1);
     const dateText = firstDayofMonth.toLocaleDateString("en-us", {
-      weekday: "long",
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
+        weekday: "long",
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
     })
 
     const dayString = dateText.split(", ")[0];
     const emptyDays = weekdays.indexOf(dayString);
 
     for (let i = 1; i <= dayOfMonth + emptyDays; i++) {
-    const dayBox = document.createElement("div");
-    dayBox.classList.add("day");
-    const monthVal = month;
-    const dateVal = i - emptyDays < 31 ? "0" + (i - emptyDays) : i - emptyDays;
-    const dateText = `${dateVal}-${monthVal}-${year}`;
-    if (i > emptyDays) {
-        dayBox.innerText = i - emptyDays;
-        const eventOfTheDay = events.find((e) => e.date == dateText);
+        const dayBox = document.createElement("div");
+        dayBox.classList.add("day");
+        const monthVal = month;
+        const dateVal = i - emptyDays < 31 ? "0" + (i - emptyDays) : i - emptyDays;
+        const dateText = `${dateVal}-${monthVal}-${year}`;
+        if (i > emptyDays) {
+            dayBox.innerText = i - emptyDays;
+            const eventOfTheDay = events.find((e) => e.date == dateText);
 
-        if (i - emptyDays === day && navigation == 0) {
-        dayBox.id = "currentDay";
+            if (i - emptyDays === day && navigation == 0) {
+                dayBox.id = "currentDay";
+            }
+
+            if (eventOfTheDay) {
+                const eventDiv = document.createElement("div");
+                eventDiv.classList.add("event");
+                eventDiv.innerText = eventOfTheDay.title;
+                dayBox.appendChild(eventDiv);
+            }
+
+            dayBox.addEventListener("click", () => {
+                showModal(dateText);
+            });
+        } else {
+            dayBox.classList.add("plain");
         }
-
-        if (eventOfTheDay) {
-        const eventDiv = document.createElement("div");
-        eventDiv.classList.add("event");
-        eventDiv.innerText = eventOfTheDay.title;
-        dayBox.appendChild(eventDiv);
-        }
-
-        dayBox.addEventListener("click", () => {
-        showModal(dateText);
-        });
-    } else {
-        dayBox.classList.add("plain");
-    }
-
     }
 };
 
 function showModal(dateText) {
-      clicked = dateText;
-      const eventOfTheDay = events.find((e) => e.date == dateText);
-      if (eventOfTheDay) {
+    clicked = dateText;
+    const eventOfTheDay = events.find((e) => e.date == dateText);
+    if (eventOfTheDay) {
         document.querySelector("#days").innerText = eventOfTheDay.title;
         viewEntry.style.display = "block";
-      }
+    }
 }
 showModal();
 getEventDate();
 
-// Airlabs API
+// AirLabs API
 var searchFormEl = document.querySelector('#airport-form');
 var formatInputEl = document.querySelector('#format-input');
 var arrivalInputEl = document.querySelector('#arrival-input');
@@ -259,19 +270,23 @@ function fetchFlightInfo(flightIata) {
             var date = dayjs().date();
             var columnId = `day-${date}`;
             var column = document.getElementById(columnId);
-            column.innerHTML += `
-            <p> Departure Date:${deptime} <br>
-            Arrival Date:${arrtime}  <br>
-            Departure Delayed:${depdelay} min <br>
-            Arrival Delayed:${arrdelay} min <br>
-            Departure Gate:${departureGate} <br>
-            Arrival Gate:${arrivalGate} <br>
-            Current Status:${status} <br>
-            Est. Flight Duration:${flightduration} min </p>
-            `
+
+            column.innerHTML +=
+                `<p> 
+                <b>Departure Date:</b> ${deptime} <br>
+                <b>Arrival Date:</b> ${arrtime}  <br>
+                <b>Departure Delayed:</b> ${depdelay} min <br>
+                <b>Arrival Delayed:</b> ${arrdelay} min <br>
+                <b>Departure Gate:</b> ${departureGate} <br>
+                <b>Arrival Gate:</b> ${arrivalGate} <br>
+                <b>Current Status:</b> ${status} <br>
+                <b>Est. Flight Duration:</b> ${flightduration} min 
+                </p>`
+
 
         })
         .catch(error => console.error(error));
+        
 }
 searchFormEl.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -284,3 +299,5 @@ searchFormEl.addEventListener('submit', function (event) {
     populateFlightNumbers(formatInputVal, arrivalVal);
 });
 numberInputEl.addEventListener('change', handleNumberInputChange);
+
+
