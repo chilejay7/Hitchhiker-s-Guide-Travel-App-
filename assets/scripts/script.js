@@ -1,4 +1,3 @@
-
 //Submit Button for Currency Exchange
 const currencyForm = $('#currency-exchange');
 const autoCurrency = ['AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTC', 'BTN', 'BWP', 'BYN', 'BYR', 'BZD', 'CAD', 'CDF', 'CHF', 'CLF', 'CLP', 'CNY', 'COP', 'CRC', 'CUC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ERN', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GGP', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'IMP', 'INR', 'IQD', 'IRR', 'ISK', 'JEP', 'JMD', 'JOD', 'JPY', 'KES', 'KGS', 'KHR', 'KMF', 'KPW', 'KRW', 'KWD', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'LTL', 'LVL', 'LYD', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRO', 'MUR', 'ZWL', 'ZMW', 'ZMK', 'ZAR', 'YER', 'XPF', 'XOF', 'XDR', 'XCD', 'XAU', 'XAG', 'XAF', 'WST', 'VUV', 'VND', 'VES', 'VEF', 'UZS', 'UYU', 'USD', 'UGX', 'UAH', 'TZS', 'TWD', 'TTD', 'TRY', 'TOP', 'TND', 'TMT', 'TJS', 'THB', 'SZL', 'SYP', 'SVC', 'STD', 'SSP', 'SRD', 'SOS', 'SLL', 'SLE', 'SHP', 'SGD', 'SEK', 'SDG', 'SCR', 'SBD', 'SAR', 'RWF', 'RUB', 'RSD', 'RON', 'QAR', 'PYG', 'PLN', 'PKR', 'PHP', 'PGK', 'PEN', 'PAB', 'OMR', 'NZD', 'NPR', 'NOK', 'NIO', 'NGN', 'NAD', 'MZN', 'MYR', 'MXN', 'MWK', 'MVR'];
@@ -40,8 +39,8 @@ let inputExchange = document.getElementById('exchange-currency')
 let inputAmount = document.getElementById('amount')
 let exchangeTotal = document.getElementById('exchange-total')
 
-let sourceCurrencies = [];
-let exchangeCurrencies = [];
+// let sourceCurrencies = [];
+// let exchangeCurrencies = [];
 
 // This function will pull exchange rate information from the Forex API.  The currency and source variables will defined based on user input and incorporated into the function to create the parameters needed.  Multiple arguments had to be defined.  From and to are used to pass the input currency values into the function.  func1 accepts a function, which will be the convertCurrency function, to give that function access to the API's data.  Amount passes the input amount to the func1 argument, which will be converted for use in the convertCurrency function.
 getExchange = (from, to, amount) => {
@@ -50,10 +49,10 @@ getExchange = (from, to, amount) => {
             console.log(response);
             return response.json();
         })
-        .then(async function (data) {
+        .then(function (data) {
             console.log(data);
             
-            await convertCurrency(data, amount);
+            convertCurrency(data, amount);
         })
     // This adds a key value pair to the currenciesExchanged object using the captured values from the form.
     // currenciesExchanged[`${from} (${amount}) to ${to}`] = exchangeTotal.innerHTML;
@@ -72,8 +71,6 @@ convertCurrency = (data, amount) => {
     currenciesExchanged[`${inputSource.value} (${inputAmount.value}) to ${inputExchange.value}`] = exchangeTotal.innerText;
     setStorage();
 }
-
-
 
 setStorage = () => {
     localStorage.setItem('currencies', JSON.stringify(currenciesExchanged));
