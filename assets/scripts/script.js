@@ -54,8 +54,8 @@ let inputExchange = document.getElementById('exchange-currency')
 let inputAmount = document.getElementById('amount')
 let exchangeTotal = document.getElementById('exchange-total')
 
-// let sourceCurrencies = [];
-// let exchangeCurrencies = [];
+let sourceCurrencies = [];
+let exchangeCurrencies = [];
 
 // This function will pull exchange rate information from the Forex API.  The currency and source variables will be defined based on user input and incorporated into the function to create the parameters needed.  Multiple arguments had to be defined.  From and to are used to pass the input currency values into the function.  func1 accepts a function, which will be the convertCurrency function, to give that function access to the API's data.  Amount passes the input amount to the func1 argument, which will be converted for use in the convertCurrency function.
 getExchange = (from, to, amount) => {
@@ -64,11 +64,10 @@ getExchange = (from, to, amount) => {
             console.log(response);
             return response.json();
         })
-        .then(function (data) {
+        .then(async function (data) {
             console.log(data);
-         
-            convertCurrency(data, amount);
 
+            await convertCurrency(data, amount);
         })
     // This adds a key-value pair to the currenciesExchanged object using the captured values from the form.
     // currenciesExchanged[`${from} (${amount}) to ${to}`] = exchangeTotal.innerHTML;
@@ -110,8 +109,6 @@ currencyForm.on('submit', async function (e) {
     console.log(inputSource.value);
     console.log(inputExchange.value);
     console.log(inputAmount.value);
-
-    e.preventDefault();
 
     // getExchange(inputSource.value, inputExchange.value, convertCurrency, inputAmount.value);
     getExchange(inputSource.value, inputExchange.value, inputAmount.value);
