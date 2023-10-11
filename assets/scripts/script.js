@@ -195,66 +195,89 @@ getEventDate();
 var searchFormEl = document.querySelector('#airport-form');
 var formatInputEl = document.querySelector('#format-input');
 var arrivalInputEl = document.querySelector('#arrival-input');
-var arr_iata = "";
+var numberInputEl = document.querySelector('#number-input'); // Add this line
+
 var access_key = "d36d2907-0b8e-4cdf-a4d1-7d3d03d05ee1"; // Replace with your actual access key
-async function searchApi(formatInputVal, arrivalVal) {
-     var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&dep_iata=${formatInputVal}&arr_iata=${arrivalVal}`
-    const response = await fetch(queryURL)
-    .then( (response) => {
-        if (!response.ok) {
-            throw new Error(`API request failed with status: ${response.status}`);
-        }
-        return response.json()
-    })
-    .then( (res) =>{
-        var data = res.response
-        if (Array.isArray(data) && data.length > 0) {
-            // Iterate through flights and log their statuses
-            console.log(data);
-            data.forEach((flight) => {
-            //   console.log(flight)
-            const flightStatus = flight.status;
+var apiKey = '5180c586-7a13-4c78-8b5a-68818afd7fd2';
+
+async function populateFlightNumbers(formatInputVal, arrivalVal) {
+    var queryURL = `https://airlabs.co/api/v9/flights?api_key=${access_key}&dep_iata=${formatInputVal}&arr_iata=${arrivalVal}`;
+
+    const response = await fetch(queryURL);
+    if (!response.ok) {
+        throw new Error(`API request failed with status: ${response.status}`);
+    }
+    const data = await response.json();
+    if (Array.isArray(data.response) && data.response.length > 0) {
+        // Clear existing options
+        numberInputEl.innerHTML = '<option value="" disabled selected> Select a flight </option>';
+        // Populate the flight numbers select element
+        data.response.forEach((flight) => {
             const flightNumber = flight.flight_number;
             const flightIata = flight.flight_iata;
-            console.log(`Flight # ${flightNumber} ${flightIata} has status: ${flightStatus}`);
-            const date = dayjs().date();
+            var optionEl = document.createElement('option');
+            optionEl.value = flightIata;
+            optionEl.textContent = `${flightIata} - ${flightNumber}`;
+            numberInputEl.appendChild(optionEl);
+        });
+    } else {
+        console.log("No flight data available.");
+    }
+}
+
+function handleNumberInputChange() {
+    var selectedFlightIata = numberInputEl.value;
+    if (selectedFlightIata) {
+        fetchFlightInfo(selectedFlightIata);
+    }
+}
+
+function fetchFlightInfo(flightIata) {
+    const apiUrl = `https://airlabs.co/api/v9/flight?flight_iata=${flightIata}&api_key=${apiKey}`;
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const deptime = data.response.dep_time_utc;
+            const arrtime = data.response.arr_time_utc;
+            const depdelay = data.response.dep_delayed;
+            const arrdelay = data.response.arr_delayed;
+            const departureGate = data.response.dep_gate;
+            const arrivalGate = data.response.arr_gate;
+            const status = data.response.status;
+            const flightduration = data.response.duration;
+            console.log('Current Status:', status);
+            console.log('Est. Flight Duration:', flightduration, 'min');
+            console.log('Departure Date:', deptime);
+            console.log('Departure Delayed:', depdelay, 'min');
+            console.log('Departure Gate:', departureGate);
+            console.log('Arrival Date:', arrtime);
+            console.log('Arrival Delayed:', arrdelay, 'min');
+            console.log('Arrival Gate:', arrivalGate);
+            var date = dayjs().date();
             var columnId = `day-${date}`;
             var column = document.getElementById(columnId);
             column.innerHTML += `
-            <p> ${flightStatus} ${flightNumber} ${flightIata} </p>
+            <p> Departure Date:${deptime} <br>
+            Arrival Date:${arrtime}  <br>
+            Departure Delayed:${depdelay} min <br>
+            Arrival Delayed:${arrdelay} min <br>
+            Departure Gate:${departureGate} <br>
+            Arrival Date:${arrivalGate} <br>
+            Current Status:${status} <br>
+            Est. Flight Duration:${flightduration} min </p>
             `
-            // localStorage.setItem('searched', JSON.stringify(flightStatus, flightNumber, flightIata));
-          });
-        } else {
-          console.log("No flight data available.");
-        }
-  } )
+
+        })
+        .catch(error => console.error(error));
 }
-
-// function displaysearch() {
-//   for ( var i = 0; i < localStorage.length; i++) {
-//     var storedSearch = JSON.parse(localStorage.getItem("searched"));
-//     const date = dayjs().date();
-//     var columnId = `day-${date}`;
-//    var column = document.getElementById(columnId);
-//    column.innerHTML += `
-//     <p> ${storedSearch}</p>
-//     `;
-//     console.log(storedSearch);
-//   }
-// }
-
-// displaysearch();
-
-function handleSearchFormSubmit(event) {
-  event.preventDefault();
-  var arrivalVal = arrivalInputEl.value
-  var formatInputVal = formatInputEl.value
-console.log(formatInputVal, arrivalVal);
-  if (!formatInputVal) {
-    console.error('You need a search input value!');
-    return;
-  }
-  searchApi(formatInputVal, arrivalVal);
-}
-searchFormEl.addEventListener('submit', handleSearchFormSubmit);
+searchFormEl.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var arrivalVal = arrivalInputEl.value;
+    var formatInputVal = formatInputEl.value;
+    if (!formatInputVal) {
+        console.error('You need a search input value!');
+        return;
+    }
+    populateFlightNumbers(formatInputVal, arrivalVal);
+});
+numberInputEl.addEventListener('change', handleNumberInputChange);
