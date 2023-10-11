@@ -264,12 +264,13 @@ function fetchFlightInfo(flightIata) {
             console.log('Departure Date:', deptime);
             console.log('Departure Delayed:', depdelay, 'min');
             console.log('Departure Gate:', departureGate);
-            console.log('Arrival Date:', arrtime);
+            console.log('Arrival Gate:', arrtime);
             console.log('Arrival Delayed:', arrdelay, 'min');
             console.log('Arrival Gate:', arrivalGate);
             var date = dayjs().date();
             var columnId = `day-${date}`;
             var column = document.getElementById(columnId);
+
             column.innerHTML +=
                 `<p> 
                 <b>Departure Date:</b> ${deptime} <br>
@@ -281,6 +282,7 @@ function fetchFlightInfo(flightIata) {
                 <b>Current Status:</b> ${status} <br>
                 <b>Est. Flight Duration:</b> ${flightduration} min 
                 </p>`
+
 
         })
         .catch(error => console.error(error));
