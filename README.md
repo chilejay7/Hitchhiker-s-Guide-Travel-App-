@@ -39,7 +39,7 @@ The Currency Exchange form provides three input fields.  The first is the curren
 
 The calendar provides a location where data related to the flight information selected can be displayed.  Data returned by the Aviation API is written to the corresponding dates on the calendar.
 
-![Screenshot1](./assets/images/HitchhikersGuide_Application.png)
+![Screenshot1](./assets/images/HitchhikersGuide.png)
 
 ## Sources:
 Calendar Source - https://www.geeksforgeeks.org/how-to-get-the-number-of-days-in-a-specified-month-using-javascript/
