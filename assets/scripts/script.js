@@ -95,6 +95,8 @@ currencyForm.on ('submit', async function (e) {
     console.log(inputExchange.value); 
     console.log(inputAmount.value); 
 
+    e.preventDefault();
+
     // getExchange(inputSource.value, inputExchange.value, convertCurrency, inputAmount.value);
     getExchange(inputSource.value, inputExchange.value, inputAmount.value);
 
