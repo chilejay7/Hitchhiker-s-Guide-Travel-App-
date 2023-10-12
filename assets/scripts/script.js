@@ -258,16 +258,17 @@ function fetchFlightInfo(flightIata) {
             var date = dayjs().date();
             var columnId = `day-${date}`;
             var column = document.getElementById(columnId);
-            column.innerHTML += `
-            <p> Departure Date:${deptime} <br>
-            Arrival Date:${arrtime}  <br>
-            Departure Delayed:${depdelay} min <br>
-            Arrival Delayed:${arrdelay} min <br>
-            Departure Gate:${departureGate} <br>
-            Arrival Gate:${arrivalGate} <br>
-            Current Status:${status} <br>
-            Est. Flight Duration:${flightduration} min </p>
-            `
+            column.innerHTML +=             
+            `<p> 
+            <b>Departure Date:</b> ${deptime} <br>
+            <b>Arrival Date:</b> ${arrtime} <br>
+            <b>Departure Delayed:</b> ${depdelay} (min.) <br>
+            <b>Arrival Delayed:</b> ${arrdelay} (min.) <br>
+            <b>Departure Gate:</b> ${departureGate} <br>
+            <b>Arrival Date:</b> ${arrivalGate} <br>
+            <b>Current Status:</b> ${status} <br>
+            <b>Est. Flight Duration:</b> ${flightduration} (min.) 
+            </p>`
 
         })
         .catch(error => console.error(error));
@@ -283,3 +284,25 @@ searchFormEl.addEventListener('submit', function (event) {
     populateFlightNumbers(formatInputVal, arrivalVal);
 });
 numberInputEl.addEventListener('change', handleNumberInputChange);
+
+var flightData = {};
+
+// Define the setStorage function
+function setStorage() {
+    localStorage.setItem('fldata', JSON.stringify(flightData));
+}
+
+// Define the getStorage function
+function getStorage() {
+    return localStorage.getItem('fldata');
+}
+
+// Define the checkStorage function
+function checkStorage() {
+    var storedData = getStorage();
+    if (storedData === null || storedData === 'undefined') {
+        flightData = {};
+    } else {
+        flightData = JSON.parse(storedData);
+    }
+}
